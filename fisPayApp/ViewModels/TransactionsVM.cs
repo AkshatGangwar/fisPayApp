@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using fisPayApp.Models;
+using System.Collections.ObjectModel;
 
 namespace fisPayApp.ViewModels
 {
     public partial class TransactionsVM: BaseVM
     {
-        ObservableCollection<StoreList> transactions;
-        public ObservableCollection<StoreList> Transactions
+        ObservableCollection<TxnList> transactions;
+        public ObservableCollection<TxnList> Transactions
         {
             get
             {
