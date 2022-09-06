@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="fisPayApp.Views.Person.PersonProfile"
+             Title="Profile Details">
+    <StackLayout BackgroundColor="#F0FFF0" Padding="10">
+        <Grid HorizontalOptions="CenterAndExpand" Margin="10" ColumnSpacing="10" RowSpacing="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Frame Grid.Row="0" BackgroundColor="Transparent" BorderColor="Transparent" HeightRequest="100" WidthRequest="100" HorizontalOptions="Center" CornerRadius="30" Padding="0" Margin="10">
+                <Image Source="user.png" Aspect="AspectFill" Margin="5" />
+            </Frame>
+            <Frame Grid.Row="1" CornerRadius="15" Margin="10,0,0,0" BackgroundColor="White">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200" />
+                        <ColumnDefinition Width="40" />
+                        <ColumnDefinition Width="40" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Text="Pesonal Details" Margin="0,10,0,0" TextColor="Green" HorizontalOptions="StartAndExpand" FontSize="Medium"/>
+                    <Frame Grid.Row="0" Grid.Column="1" HeightRequest="40" WidthRequest="40" HorizontalOptions="EndAndExpand" BackgroundColor="Transparent" BorderColor="Transparent">
+                        <Image Source="edit.png" HeightRequest="30" WidthRequest="30" Aspect="AspectFill"/>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding EditProfileCommand}" />
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                    <Frame Grid.Row="0" Grid.Column="2" HeightRequest="40" WidthRequest="40" HorizontalOptions="EndAndExpand" BackgroundColor="Transparent" BorderColor="Transparent">
+                        <Image Source="cam.png" HeightRequest="30" WidthRequest="30" Aspect="AspectFill"/>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding UploadImageCommand}" />
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                    <StackLayout Grid.Row="1" Orientation="Vertical" Spacing="10" Margin="0,5,0,0">
+                        <Label x:Name="Name" TextColor="#006400" FontSize="Title" />
+                        <Label x:Name="Mobile" FontSize="Subtitle" />
+                        <Label x:Name="Email" FontSize="Subtitle" />
+                    </StackLayout> 
+                </Grid>
+            </Frame>
+        </Grid>
+    </StackLayout>
+</ContentPage>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="fisPayApp.Controls.BasePopUp"
+             x:Name="this">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand" Margin="15" HorizontalOptions="FillAndExpand" Padding="10">
+            <Frame VerticalOptions="CenterAndExpand"  CornerRadius="30" BackgroundColor="White">
+                <StackLayout Padding="5,0,5,10"  >
+                    <StackLayout Padding="0,0,0,15">
+                        <BoxView Color="#58D68D" CornerRadius="30" WidthRequest="100" HeightRequest="10" />
+                    </StackLayout>
+                    <ContentView x:Name="ContentView"  />
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

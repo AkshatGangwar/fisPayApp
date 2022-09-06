@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="fisPayApp.Views.Payments.MobilePay"
+             Title="">
+    <StackLayout BackgroundColor="#F0FFF0">
+        <Grid HorizontalOptions="CenterAndExpand" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Frame Grid.Row="0" BackgroundColor="Transparent" BorderColor="Transparent" HeightRequest="100" WidthRequest="100" HorizontalOptions="Center" CornerRadius="30" Padding="0" Margin="10">
+                <Image Source="user.png" Aspect="AspectFill" Margin="5" />
+            </Frame>
+            <Frame Grid.Row="1" CornerRadius="15" Margin="10,10,5,10" WidthRequest="250" BackgroundColor="White">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0"  Text="{Binding Name}" Margin="0,10,0,0" TextColor="Green" HorizontalOptions="CenterAndExpand" FontSize="Medium"/>
+                    <StackLayout Grid.Row="1" Orientation="Vertical" Spacing="10" Margin="0,5,0,0">
+                        <Label Text="You are Paying" TextColor="Grey" HorizontalOptions="CenterAndExpand" FontSize="Subtitle" />
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="5">
+                            <Label Text="₹" VerticalOptions="Center" FontSize="Title"/>
+                            <Entry Keyboard="Numeric" Text="{Binding Amount}" Placeholder="0" FontSize="Title" />
+                        </StackLayout>
+                        <Entry Placeholder="Add Message" MaxLength="20" Text="{Binding Comment}" HorizontalOptions="Center" FontSize="Subtitle" />
+                        <Button Text="PAY" BackgroundColor="#58D68D" TextColor="White" FontAttributes="Bold" CornerRadius="30" WidthRequest="100" Margin="0,15,0,10" Command="{Binding PayCommand}"/>
+                    </StackLayout>
+                </Grid>
+            </Frame>
+            <Frame Grid.Row="2" BackgroundColor="Transparent" BorderColor="Transparent" HeightRequest="50" WidthRequest="50" Padding="0" Margin="5">
+                <ActivityIndicator IsRunning="True" IsVisible="{Binding Indicator}" Color="#58D68D"></ActivityIndicator>
+            </Frame>
+        </Grid>
+    </StackLayout>
+</ContentPage>

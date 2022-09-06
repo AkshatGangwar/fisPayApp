@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="fisPayApp.Views.Registration.RegistrationPage"
+             Title="Sign Up">
+    <StackLayout>
+        <!--<Image Source="fislogo.gif" HorizontalOptions="Center" Margin="0,50,0,0"></Image>-->
+        <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand" Margin="20,50,20,0" Padding="0">
+
+            <Frame BackgroundColor="Transparent" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                <StackLayout Orientation="Horizontal">
+                    <Frame BackgroundColor="White" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                        <Image Source="mobile.png" Aspect="AspectFill" Margin="5"></Image>
+                    </Frame>
+                    <Entry Text="{Binding Mobile}" MaxLength="10" Placeholder="Mobile Number" Keyboard="Numeric" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"></Entry>
+                </StackLayout>
+            </Frame>
+            <Frame BackgroundColor="Transparent" BorderColor="Transparent" HeightRequest="50" WidthRequest="50" Padding="0" Margin="5">
+                <ActivityIndicator IsRunning="True" IsVisible="{Binding Indicator}" Color="#58D68D"></ActivityIndicator>
+            </Frame>
+            <Button Text="Proceed" BackgroundColor="#58D68D" TextColor="White" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0" Command="{Binding RequestOTPCommand}"></Button>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

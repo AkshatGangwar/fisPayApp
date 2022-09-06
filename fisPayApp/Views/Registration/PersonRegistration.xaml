@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="fisPayApp.Views.Registration.PersonRegistration"
+             xmlns:handlers="clr-namespace:fisPayApp.Handlers"
+             Title="Person Registration">
+    <StackLayout Spacing="15" Orientation="Vertical" HorizontalOptions="CenterAndExpand" Margin="20,20,20,0" >
+        <Frame BackgroundColor="Transparent" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+            <StackLayout Orientation="Horizontal">
+                <Frame BackgroundColor="White" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                    <Image Source="person.png" Aspect="AspectFill" Margin="5"/>
+                </Frame>
+                <Entry Text="{Binding Name}" Keyboard="Text" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0" Placeholder="Name" />
+            </StackLayout>
+        </Frame>
+        <Frame BackgroundColor="Transparent" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+            <StackLayout Orientation="Horizontal">
+                <Frame BackgroundColor="White" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                    <Image Source="mobile.png" Aspect="AspectFill" Margin="5"/>
+                </Frame>
+                <Entry Text="{Binding MobileNum}" IsReadOnly="True" Placeholder="Mobile Number" Keyboard="Numeric" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+            </StackLayout>
+        </Frame>
+        <Frame BackgroundColor="Transparent" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+            <StackLayout Orientation="Horizontal">
+                <Frame BackgroundColor="White" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                    <Image Source="email.png" Aspect="AspectFill" Margin="5"/>
+                </Frame>
+                <Entry Text="{Binding Email}" Keyboard="Email" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0" Placeholder="Email" />
+            </StackLayout>
+        </Frame>
+        <Frame BackgroundColor="Transparent" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+            <StackLayout Orientation="Horizontal">
+                <Frame BackgroundColor="White" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                    <Image Source="lock.png" Aspect="AspectFill" Margin="6"/>
+                </Frame>
+                <Entry Text="{Binding Password}" Keyboard="Default" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0" Placeholder="Password" IsPassword="{Binding Source={x:Reference NewPwdShowHideTrigger}, Path=HidePassword}"/>
+                <ImageButton Source="eyeslash.png" HeightRequest="25" WidthRequest="25" Padding="0" Aspect="AspectFill" Margin="10">
+                    <ImageButton.Triggers>
+                        <EventTrigger Event="Clicked">
+                            <handlers:PwdShowHideTrigger ShowIcon="eye" HideIcon="eyeslash" x:Name="NewPwdShowHideTrigger" />
+                        </EventTrigger>
+                    </ImageButton.Triggers>
+                </ImageButton>
+            </StackLayout>
+        </Frame>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" Margin="0,5,0,0" Padding="0">
+            <Image Source="info.png" HeightRequest="20" WidthRequest="20" Aspect="AspectFill" Margin="0"/>
+            <Label Text="Password Policy" TextColor="#1D8348" FontAttributes="Bold" FontSize="Small" />
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Tapped="btnClicked"/>
+            </StackLayout.GestureRecognizers>
+        </StackLayout>
+        <Frame BackgroundColor="Transparent" BorderColor="Transparent" HeightRequest="50" WidthRequest="50" Padding="0" Margin="5">
+            <ActivityIndicator IsRunning="True" IsVisible="{Binding Indicator}" Color="#58D68D"/>
+        </Frame>
+        <Button Text="SIGN UP" BackgroundColor="#58D68D" TextColor="White" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0" Command="{Binding SignUpCommand}"/>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="0,30,0,0" Padding="0">
+            <Label Text="Already have a account? " TextColor="DarkGray" FontSize="Small"/>
+            <StackLayout>
+                <Label Text="Sign In" TextColor="#1D8348" FontAttributes="Bold" FontSize="Small" />
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding LoginPageCommand}"/>
+                </StackLayout.GestureRecognizers>
+            </StackLayout>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

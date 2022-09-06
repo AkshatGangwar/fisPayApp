@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="fisPayApp.StoreLocator"
+             BackgroundColor="#F0FFF0"
+             Title="Store Locator">
+    <StackLayout Spacing="0" Orientation="Vertical" HorizontalOptions="CenterAndExpand" Margin="20,20,20,0" >
+        <Frame BackgroundColor="White" CornerRadius="30" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand" >
+            <StackLayout Orientation="Horizontal">
+                <Entry Text="{Binding City}" x:Name="xCity" TextChanged="Entry_TextChanged" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="20,0,20,0" Placeholder="Enter City to Search...">
+                </Entry>
+                <Frame BackgroundColor="White" BorderColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                    <Image Source="magnify.png" Aspect="AspectFill" Margin="5"></Image>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GetStoreByCityCommand}"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+            </StackLayout>
+        </Frame>
+        <Frame IsVisible="False" x:Name="xFrame" BackgroundColor="Transparent" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand">
+            <ListView x:Name="xList" ItemSelected="ListView_ItemSelected"/>
+        </Frame>
+        <StackLayout Orientation="Horizontal">
+            <Frame BackgroundColor="#58D68D" CornerRadius="30" WidthRequest="140" Margin="0,10,0,0" Padding="10" HorizontalOptions="StartAndExpand" >
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="gps.png" HeightRequest="30" WidthRequest="30" Aspect="AspectFill"/>
+                    <Label Margin="10,5,0,0" FontAttributes="Bold" TextColor="White" Text="Near Me"/>
+                </StackLayout>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer/>
+                </Frame.GestureRecognizers>
+            </Frame>
+        </StackLayout>
+        <CollectionView ItemsSource="{Binding StoreLists}" Margin="0,20,0,0">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Grid.Row="0" CornerRadius="15" Margin="0,10,0,0" BackgroundColor="White">
+                        <Grid ColumnSpacing="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="180" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.RowSpan="3" Source="store.png" Aspect="AspectFill" HeightRequest="50" WidthRequest="50"/>
+                            <Label Grid.Row="0" Grid.Column="1" Margin="10,0,0,0" Text="{Binding storeName}" FontAttributes="Bold" />
+                            <Label Grid.Row="1" Grid.Column="1" Margin="10,0,0,0" Text="{Binding description}" FontAttributes="Italic" />
+                            <Label Grid.Row="2" Grid.Column="1" Margin="10,0,0,0" Text="{Binding adrs}" VerticalOptions="End" />
+                            <Image Grid.RowSpan="2" Grid.Column="2" Source="track.png" Aspect="AspectFill" HeightRequest="30" WidthRequest="30"/>
+                            <Label Grid.Row="2" Grid.Column="2" Text="Direction" VerticalOptions="End" />
+
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+</ContentPage>

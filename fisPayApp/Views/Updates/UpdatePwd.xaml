@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="fisPayApp.Views.UpdatePwd"
+             xmlns:viewmodel="clr-namespace:fisPayApp.ViewModels"
+             x:DataType="viewmodel:UpdatePwdVM"
+             xmlns:handlers="clr-namespace:fisPayApp.Handlers"
+             Title="Update Password">
+
+    <Grid RowSpacing="25" Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" x:Name="row1"/>
+            <RowDefinition Height="Auto" x:Name="row2"/>
+            <RowDefinition Height="Auto" x:Name="row3"/>
+        </Grid.RowDefinitions>
+        <StackLayout Grid.Row="0" >
+            <Label Text="New Password"></Label>
+            <Frame BackgroundColor="Transparent" BorderColor="LightGreen" Margin="0,20,0,0" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                <StackLayout Orientation="Horizontal">
+                    <Frame BackgroundColor="White" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                        <Image Source="lock.png" Aspect="AspectFill" Margin="6"></Image>
+                    </Frame>
+                    <Entry Text="{Binding Password}" IsPassword="{Binding Source={x:Reference NewPwdShowHideTrigger}, Path=HidePassword}" Placeholder="***************" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"></Entry>
+                    <ImageButton Source="eyeslash.png" HeightRequest="25" WidthRequest="25" Padding="0" Aspect="AspectFill" Margin="10">
+                        <ImageButton.Triggers>
+                            <EventTrigger Event="Clicked">
+                                <handlers:PwdShowHideTrigger ShowIcon="eye" HideIcon="eyeslash" x:Name="NewPwdShowHideTrigger" />
+                            </EventTrigger>
+                        </ImageButton.Triggers>
+                    </ImageButton>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+        <StackLayout Grid.Row="1"  >
+            <Label Text="Confirm Password"></Label>
+            <Frame BackgroundColor="Transparent" BorderColor="LightGreen" Margin="0,20,0,0" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                <StackLayout Orientation="Horizontal">
+                    <Frame BackgroundColor="White" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                        <Image Source="lock.png" Aspect="AspectFill" Margin="6"></Image>
+                    </Frame>
+                    <Entry Text="{Binding ConfPassword}"  IsPassword="{Binding Source={x:Reference ConfPwdShowHideTrigger}, Path=HidePassword}" Placeholder="***************" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"></Entry>
+                    <ImageButton Source="eyeslash.png" HeightRequest="25" WidthRequest="25" Padding="0" Aspect="AspectFill" Margin="10">
+                        <ImageButton.Triggers>
+                            <EventTrigger Event="Clicked">
+                                <handlers:PwdShowHideTrigger ShowIcon="eye" HideIcon="eyeslash" x:Name="ConfPwdShowHideTrigger" />
+                            </EventTrigger>
+                        </ImageButton.Triggers>
+                    </ImageButton>
+                </StackLayout>
+            </Frame>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" Margin="0,5,0,0" Padding="0">
+                <ImageButton Source="info.png" HeightRequest="20" Clicked="btnClicked" WidthRequest="20" Aspect="AspectFill" Margin="0"></ImageButton>
+                <Label Text="Password Policy" TextColor="#1D8348" FontAttributes="Bold" FontSize="Small" ></Label>
+            </StackLayout>
+        </StackLayout>
+        <StackLayout Grid.Row="2" VerticalOptions="Center">
+            <Frame BackgroundColor="Transparent" BorderColor="Transparent" HeightRequest="50" WidthRequest="50" Padding="0" Margin="5">
+                <ActivityIndicator IsRunning="True" IsVisible="{Binding Indicator}" Color="#58D68D"></ActivityIndicator>
+            </Frame>
+            <Button Text="Update" BackgroundColor="#58D68D" TextColor="White" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0" Command="{Binding UpdateCommand}"></Button>
+        </StackLayout>
+    </Grid>
+</ContentPage>

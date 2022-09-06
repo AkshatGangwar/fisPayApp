@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="fisPayApp.Views.Registration.DetailsCapturePage"
+             xmlns:handless="clr-namespace:fisPayApp.Models"
+             Title="Sign Up">
+
+    <Grid RowSpacing="25" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" x:Name="row1"/>
+            <RowDefinition Height="Auto" x:Name="row2"/>
+        </Grid.RowDefinitions>
+        <Frame Grid.Row="0" BackgroundColor="Transparent" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+            <StackLayout Orientation="Vertical">
+                <Frame BackgroundColor="White" BorderColor="Transparent" HeightRequest="100" WidthRequest="100" CornerRadius="30" Padding="0" Margin="5">
+                    <Image Source="vendor.png" Aspect="AspectFill" Margin="0">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding VendorCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Frame>
+                <Label Text="Business" HorizontalTextAlignment="Center"></Label>
+            </StackLayout>
+        </Frame>
+        <Frame Grid.Row="1" BackgroundColor="Transparent" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+            <StackLayout   Orientation="Vertical">
+                <Frame BackgroundColor="White" BorderColor="Transparent" HeightRequest="100" WidthRequest="100" CornerRadius="30" Padding="0" Margin="5">
+                    <Image Source="avtar.png" Aspect="AspectFill" Margin="0">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding PersonCommand}"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Frame>
+                <Label Text="Person" HorizontalTextAlignment="Center"></Label>
+            </StackLayout>
+        </Frame>
+    </Grid>
+</ContentPage>

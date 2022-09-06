@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<controls:BasePopUp xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.PaymentSucess"
+             xmlns:controls="clr-namespace:fisPayApp.Controls"
+             xmlns:viewmodel="clr-namespace:fisPayApp.ViewModels"
+             x:DataType="viewmodel:PaymentSuccessVM"
+             Shell.NavBarIsVisible="False">
+    <controls:BasePopUp.PopupContent>
+        <StackLayout>
+            <StackLayout HorizontalOptions="CenterAndExpand" Margin="30,20,30,0">
+                <Image Source="success.png" HeightRequest="50" WidthRequest="50"/>
+                <Label Text="Success!" TextColor="DarkGreen" FontSize="Medium" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="5">
+                    <Label Text="Paid to: " VerticalOptions="Center" FontSize="Title"/>
+                    <Entry Text="{Binding Username}" FontSize="Title" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="5">
+                    <Label Text="Amount Paid: ₹" VerticalOptions="Center" FontSize="Title"/>
+                    <Entry Text="{Binding Amount}" FontSize="Title" />
+                </StackLayout>
+            </StackLayout>
+
+            <StackLayout Margin="10,20,10,10">
+                <StackLayout Margin="40,15">
+                    <ImageButton Source="home.png" />
+                    <Image Source="left.png" WidthRequest="50" />
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding HomeCommand}"/>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </controls:BasePopUp.PopupContent>
+</controls:BasePopUp>

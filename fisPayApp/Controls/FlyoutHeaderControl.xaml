@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<StackLayout Padding="20" xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI"
+             x:Class="fisPayApp.Controls.FlyoutHeaderControl" BackgroundColor="#F0FFF0">
+    <StackLayout Orientation="Vertical" Spacing="10" >
+        <Frame BackgroundColor="Transparent" BorderColor="Transparent" HeightRequest="100" WidthRequest="100" HorizontalOptions="Center" CornerRadius="30" Padding="0" Margin="5">
+            <Image Source="user.png" Aspect="AspectFill" Margin="5"></Image>
+        </Frame>
+        <Label x:Name="lblUserName"  FontSize="28" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" />
+        <Frame BackgroundColor="Transparent" BorderColor="Transparent" HeightRequest="180" WidthRequest="180" HorizontalOptions="Center"  Padding="0" Margin="5">
+            <zxing:BarcodeGeneratorView Format="QrCode" x:Name="qrdata" BackgroundColor="#F0FFF0" Margin="5" ForegroundColor="#006400" />
+        </Frame>
+    </StackLayout>
+</StackLayout>

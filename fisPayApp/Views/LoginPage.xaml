@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="fisPayApp.Views.LoginPage"
+             xmlns:handlers="clr-namespace:fisPayApp.Handlers"
+             Title="">
+    <Grid BackgroundColor="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid RowSpacing="5" Grid.Row="1" Margin="20,20,20,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Image Grid.Row="1" Source="login.png" Margin="0" HorizontalOptions="Center" HeightRequest="100" WidthRequest="100"></Image>
+            <Label Grid.Row="2" Text="Sign in to continue" Margin="0,20,0,0" HorizontalOptions="Center" FontSize="Subtitle"></Label>
+            <StackLayout Grid.Row="3" Orientation="Vertical" HorizontalOptions="CenterAndExpand">
+                <Frame BackgroundColor="Transparent" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                    <StackLayout Orientation="Horizontal">
+                        <Frame BackgroundColor="White" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                            <Image Source="mobile.png" Aspect="AspectFill" Margin="5"></Image>
+                        </Frame>
+                        <Entry Text="{Binding UserMobile}" x:Name="UserMobile" Placeholder="Mobile Number" Keyboard="Numeric" TextColor="Black" FontAttributes="Bold" Unfocused="onFocusOutEntry" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"></Entry>
+                    </StackLayout>
+                </Frame>
+
+                <Frame BackgroundColor="Transparent" BorderColor="LightGreen" Margin="0,20,0,0" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                    <StackLayout Orientation="Horizontal">
+                        <Frame BackgroundColor="White" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                            <Image Source="lock.png" Aspect="AspectFill" Margin="6"></Image>
+                        </Frame>
+                        <Entry Text="{Binding Password}" x:Name="Password" IsPassword="{Binding Source={x:Reference PwdShowHideActualTrigger}, Path=HidePassword}" Placeholder="Password" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Keyboard="Default" Unfocused="onFocusOutEntry" Margin="0,0,20,0"></Entry>
+                        <ImageButton Source="eyeslash.png" HeightRequest="25" WidthRequest="25" Padding="0" Aspect="AspectFill" Margin="10">
+                            <ImageButton.Triggers>
+                                <EventTrigger Event="Clicked">
+                                    <handlers:PwdShowHideTrigger ShowIcon="eye" HideIcon="eyeslash" x:Name="PwdShowHideActualTrigger" />
+                                </EventTrigger>
+                            </ImageButton.Triggers>
+                        </ImageButton>
+                    </StackLayout>
+                </Frame>
+                <StackLayout Orientation="Horizontal" Margin="0,20,0,0" Padding="0">
+                    <CheckBox x:Name="chkRememberMe" CheckedChanged="UpdateRemChkBoxVal"></CheckBox>
+                    <Label Text="Remember Me" TextColor="DarkGray" FontSize="Small" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"></Label>
+                    <StackLayout HorizontalOptions="EndAndExpand">
+                        <Label Text="Forgot Password" TextColor="#1D8348" FontAttributes="Bold"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"></Label>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ForgotPwdCommand}"/>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                </StackLayout>
+                <Frame BackgroundColor="Transparent" BorderColor="Transparent" HeightRequest="50" WidthRequest="50" Padding="0" Margin="5">
+                    <ActivityIndicator IsRunning="True" IsVisible="{Binding Signing}" Color="#58D68D"></ActivityIndicator>
+                </Frame>
+                <Button Text="SIGN IN" BackgroundColor="#58D68D" TextColor="White" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0" Command="{Binding LoginCommand}"></Button>
+                <Button Text="DevPage" IsVisible="False" BackgroundColor="#58D68D" TextColor="White" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0" Command="{Binding DevPageCommand}"></Button>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="0,60,0,0" Padding="0">
+                    <Label Text="New User? " TextColor="DarkGray" FontSize="Small"></Label>
+                    <StackLayout>
+                        <Label Text="Sign Up" TextColor="#1D8348" FontAttributes="Bold" FontSize="Small" ></Label>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding RegisterPageCommand}"/>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </Grid>
+    </Grid>
+</ContentPage>
