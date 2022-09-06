@@ -13,7 +13,7 @@ public partial class PersonDashBoardPage : ContentPage
         BindingContext = new PersonDashboardVM();
         Routing.RegisterRoute(nameof(QRScanner), typeof(QRScanner));
         Routing.RegisterRoute(nameof(PdfReports), typeof(PdfReports));
-        Routing.RegisterRoute(nameof(MobilePay), typeof(MobilePay));
+        Routing.RegisterRoute(nameof(SearchCustomer), typeof(SearchCustomer));
         Routing.RegisterRoute(nameof(ReferNEarn), typeof(ReferNEarn));
         Routing.RegisterRoute(nameof(RewardsPage), typeof(RewardsPage));
         Routing.RegisterRoute(nameof(TxnHistory), typeof(TxnHistory));

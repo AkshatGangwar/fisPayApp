@@ -58,10 +58,10 @@
                 <Frame BackgroundColor="Transparent" BorderColor="Transparent" HeightRequest="50" WidthRequest="50" Padding="0" Margin="5">
                     <ActivityIndicator IsRunning="True" IsVisible="{Binding Signing}" Color="#58D68D"></ActivityIndicator>
                 </Frame>
-                <Button Text="SIGN IN" BackgroundColor="#58D68D" TextColor="White" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0" Command="{Binding LoginCommand}"></Button>
-                <Button Text="DevPage" IsVisible="False" BackgroundColor="#58D68D" TextColor="White" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0" Command="{Binding DevPageCommand}"></Button>
+                <Button Text="SIGN IN" BackgroundColor="#58D68D" TextColor="White" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0" Command="{Binding LoginCommand}"/>
+                <Button Text="DevPage" IsVisible="False" BackgroundColor="#58D68D" TextColor="White" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0" Command="{Binding DevPageCommand}"/>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="0,60,0,0" Padding="0">
-                    <Label Text="New User? " TextColor="DarkGray" FontSize="Small"></Label>
+                    <Label Text="New User? " TextColor="DarkGray" FontSize="Small"/>
                     <StackLayout>
                         <Label Text="Sign Up" TextColor="#1D8348" FontAttributes="Bold" FontSize="Small" ></Label>
                         <StackLayout.GestureRecognizers>

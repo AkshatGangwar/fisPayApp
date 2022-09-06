@@ -40,7 +40,7 @@ namespace fisPayApp.ViewModels
         [RelayCommand]
         async void Pay()
         {
-            if (!string.IsNullOrWhiteSpace(UserId))
+            if (!string.IsNullOrWhiteSpace(UserId)&& !string.IsNullOrWhiteSpace(Amount)&& Amount=="0")
             {
                 Indicator = "True";
                 //var response = await loginRepository.RegistrationOtp(Mobile);
@@ -66,7 +66,7 @@ namespace fisPayApp.ViewModels
             else
             {
                 CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-                var toast = Toast.Make("Error", ToastDuration.Short, 18);
+                var toast = Toast.Make("Please Enter Proper Amount...", ToastDuration.Short, 18);
                 _ = toast.Show(cancellationTokenSource.Token);
             }
         }

@@ -244,22 +244,84 @@ namespace fisPayApp.Services
                 return null;
             }
         }
-
+        public async Task<WalletResponse> ActivateWallet(WalletRequest walletRequest)
+        {
+            try
+            {
+                string walletRequestStr = JsonConvert.SerializeObject(walletRequest);
+                string url = "https://fispayapi.azurewebsites.net/api/Person/WalletRegistration";
+                var content = await ServiceRequest(url, walletRequestStr, "Post");
+                if (content != null)
+                {
+                    return JsonConvert.DeserializeObject<WalletResponse>(content.ToString());
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        public async Task<Response> SetWalletFlag(WalletRequest walletRequest)
+        {
+            try
+            {
+                string walletRequestStr = JsonConvert.SerializeObject(walletRequest);
+                string url = "https://fispayapi.azurewebsites.net/api/Person/WalletActivation";
+                var content = await ServiceRequest(url, walletRequestStr, "Put");
+                if (content != null)
+                {
+                    return JsonConvert.DeserializeObject<Response>(content.ToString());
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        public async Task<Response> AddWalletAmount(AddWalletRequest addWalletRequest)
+        {
+            try
+            {
+                string walletRequestStr = JsonConvert.SerializeObject(addWalletRequest);
+                string url = "https://fispayapi.azurewebsites.net/api/Person/AddWalletAmount";
+                var content = await ServiceRequest(url, walletRequestStr, "Post");
+                if (content != null)
+                {
+                    return JsonConvert.DeserializeObject<Response>(content.ToString());
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
         public async Task<Response> UpdatePersonProfile(PersonProfileData personProfileData)
         {
             try
             {
-               string personProfileDataStr = JsonConvert.SerializeObject(personProfileData);
-                    string url = "https://fispayapi.azurewebsites.net/api/Authentication/UpdatePersonProfile";
-                    var content = await ServiceRequest(url, personProfileDataStr, "Put");
-                    if (content != null)
-                    {
-                        return JsonConvert.DeserializeObject<Response>(content.ToString());
-                    }
-                    else
-                    {
-                        return null;
-                    }
+                string personProfileDataStr = JsonConvert.SerializeObject(personProfileData);
+                string url = "https://fispayapi.azurewebsites.net/api/Authentication/UpdatePersonProfile";
+                var content = await ServiceRequest(url, personProfileDataStr, "Put");
+                if (content != null)
+                {
+                    return JsonConvert.DeserializeObject<Response>(content.ToString());
+                }
+                else
+                {
+                    return null;
+                }
             }
             catch (Exception)
             {
@@ -271,17 +333,17 @@ namespace fisPayApp.Services
         {
             try
             {
-               string updatePwdRequestStr = JsonConvert.SerializeObject(updatePwdRequest);
-                    string url = "https://fispayapi.azurewebsites.net/api/Authentication/ForgetPassword";
-                    var content = await ServiceRequest(url, updatePwdRequestStr, "Post");
-                    if (content != null)
-                    {
-                        return JsonConvert.DeserializeObject<Response>(content.ToString());
-                    }
-                    else
-                    {
-                        return null;
-                    }
+                string updatePwdRequestStr = JsonConvert.SerializeObject(updatePwdRequest);
+                string url = "https://fispayapi.azurewebsites.net/api/Authentication/ForgetPassword";
+                var content = await ServiceRequest(url, updatePwdRequestStr, "Post");
+                if (content != null)
+                {
+                    return JsonConvert.DeserializeObject<Response>(content.ToString());
+                }
+                else
+                {
+                    return null;
+                }
             }
             catch (Exception)
             {

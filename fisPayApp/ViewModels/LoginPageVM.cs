@@ -56,9 +56,7 @@ namespace fisPayApp.ViewModels
                     App.UserDetails = response.dataObject.data;
                     App.Token = response.dataObject.data.token;
                     Signing = "False";
-                   
                     await AppConstant.AddFlyoutMenusDetails();
-                    
                 }
                 else
                 {

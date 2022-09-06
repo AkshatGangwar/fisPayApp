@@ -179,6 +179,9 @@
 	  <MauiXaml Update="Views\PopUps\PaymentSucess.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\PopUps\WalletOtp.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Registration\DetailsCapturePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

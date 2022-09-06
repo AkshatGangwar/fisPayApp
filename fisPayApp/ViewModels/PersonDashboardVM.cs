@@ -19,7 +19,7 @@ namespace fisPayApp.ViewModels
         [RelayCommand]
         async void Mobile()
         {
-            await Shell.Current.GoToAsync(nameof(MobilePay));
+            await Shell.Current.GoToAsync(nameof(SearchCustomer));
         }
         [RelayCommand]
         async void History()
