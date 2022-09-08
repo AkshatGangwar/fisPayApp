@@ -15,10 +15,6 @@
         public string zipcode { get; set; }
         public string latitude { get; set; }
         public string longitude { get; set; }
-        public string adrs
-        {
-           get => $"{address},{landmark}";
-        }
         public string geocode
         {
             get => $"{latitude},{longitude}";

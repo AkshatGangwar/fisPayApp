@@ -93,6 +93,8 @@
 	  <None Remove="Resources\Images\hours.png" />
 	  <None Remove="Resources\Images\left.png" />
 	  <None Remove="Resources\Images\magnify.png" />
+	  <None Remove="Resources\Images\map.png" />
+	  <None Remove="Resources\Images\money.png" />
 	  <None Remove="Resources\Images\moneybag.png" />
 	  <None Remove="Resources\Images\pulse.svg" />
 	  <None Remove="Resources\Images\qrpay.png" />
@@ -177,6 +179,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\PopUps\PaymentSucess.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\PopUps\StorePopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\PopUps\WalletOtp.xaml">

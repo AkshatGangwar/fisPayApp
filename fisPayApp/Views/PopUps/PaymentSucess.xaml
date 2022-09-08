@@ -20,15 +20,9 @@
                     <Entry Text="{Binding Amount}" FontSize="Title" />
                 </StackLayout>
             </StackLayout>
-
             <StackLayout Margin="10,20,10,10">
-                <StackLayout Margin="40,15">
-                    <ImageButton Source="home.png" />
-                    <Image Source="left.png" WidthRequest="50" />
-                    <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding HomeCommand}"/>
-                    </StackLayout.GestureRecognizers>
-                </StackLayout>
+                <ImageButton Source="home.png" Command="{Binding HomeCommand}"/>
+                <ImageButton Source="left.png" WidthRequest="50" Command="{Binding HomeCommand}"/>
             </StackLayout>
         </StackLayout>
     </controls:BasePopUp.PopupContent>

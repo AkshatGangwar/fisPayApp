@@ -12,12 +12,12 @@
                 <Frame BackgroundColor="White" BorderColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
                     <Image Source="magnify.png" Aspect="AspectFill" Margin="5"></Image>
                     <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding GetStoreByCityCommand}"/>
+                        <TapGestureRecognizer Tapped="ClearListView" Command="{Binding GetStoreByCityCommand}"/>
                     </Frame.GestureRecognizers>
                 </Frame>
             </StackLayout>
         </Frame>
-        <Frame IsVisible="False" x:Name="xFrame" BackgroundColor="Transparent" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand">
+        <Frame IsVisible="False" x:Name="xFrame" BackgroundColor="White" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand">
             <ListView x:Name="xList" ItemSelected="ListView_ItemSelected"/>
         </Frame>
         <StackLayout Orientation="Horizontal">
@@ -27,37 +27,38 @@
                     <Label Margin="10,5,0,0" FontAttributes="Bold" TextColor="White" Text="Near Me"/>
                 </StackLayout>
                 <Frame.GestureRecognizers>
-                    <TapGestureRecognizer/>
+                    <TapGestureRecognizer Tapped="ClearListView" Command="{Binding GetStoreByGpsCommand}"/>
                 </Frame.GestureRecognizers>
             </Frame>
         </StackLayout>
-        <CollectionView ItemsSource="{Binding StoreLists}" Margin="0,20,0,0">
-            <CollectionView.ItemTemplate>
+        <ListView x:Name="xStoreList" SelectionMode="None" ItemTapped="xStoreList_ItemTapped" ItemsSource="{Binding StoreLists}" RowHeight="150"  >
+            <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Frame Grid.Row="0" CornerRadius="15" Margin="0,10,0,0" BackgroundColor="White">
-                        <Grid ColumnSpacing="10">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="180" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-
-                            <Image Grid.RowSpan="3" Source="store.png" Aspect="AspectFill" HeightRequest="50" WidthRequest="50"/>
-                            <Label Grid.Row="0" Grid.Column="1" Margin="10,0,0,0" Text="{Binding storeName}" FontAttributes="Bold" />
-                            <Label Grid.Row="1" Grid.Column="1" Margin="10,0,0,0" Text="{Binding description}" FontAttributes="Italic" />
-                            <Label Grid.Row="2" Grid.Column="1" Margin="10,0,0,0" Text="{Binding adrs}" VerticalOptions="End" />
-                            <Image Grid.RowSpan="2" Grid.Column="2" Source="track.png" Aspect="AspectFill" HeightRequest="30" WidthRequest="30"/>
-                            <Label Grid.Row="2" Grid.Column="2" Text="Direction" VerticalOptions="End" />
-
-                        </Grid>
-                    </Frame>
+                    <ViewCell>
+                        <Frame Grid.Row="0" CornerRadius="30" Margin="0,10,0,0" BorderColor="LightGreen" BackgroundColor="White">
+                            <Grid ColumnSpacing="10" x:Name="xGrid">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Frame Grid.RowSpan="4" BackgroundColor="#F0FFF0" CornerRadius="20" BorderColor="Transparent" HeightRequest="60" WidthRequest="60">
+                                    <Image  Source="store.png" HeightRequest="40" WidthRequest="40" Aspect="AspectFill" />
+                                </Frame>
+                                <Label Grid.Row="0" Grid.Column="1"  TextColor="DarkGreen" Margin="10,0,0,0" Text="{Binding storeName}" FontAttributes="Bold" />
+                                <Label Grid.Row="1" Grid.Column="1" TextColor="Grey" Margin="10,5,0,0" Text="{Binding description}" FontAttributes="Italic" />
+                                <Label Grid.Row="2" Grid.Column="1" Margin="10,5,0,0" Text="{Binding address}" VerticalOptions="End" />
+                                <Label Grid.Row="3" Grid.Column="1" Margin="10,0,0,0" Text="{Binding landmark}" />
+                            </Grid>
+                        </Frame>
+                    </ViewCell>
                 </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+            </ListView.ItemTemplate>
+        </ListView>
     </StackLayout>
 </ContentPage>

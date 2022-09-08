@@ -2,7 +2,6 @@
 using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using fisPayApp.Views.Registration;
 using MauiApp1;
 
 namespace fisPayApp.ViewModels
@@ -40,7 +39,7 @@ namespace fisPayApp.ViewModels
         [RelayCommand]
         async void Pay()
         {
-            if (!string.IsNullOrWhiteSpace(UserId)&& !string.IsNullOrWhiteSpace(Amount)&& Amount=="0")
+            if (!string.IsNullOrWhiteSpace(UserId)&& !string.IsNullOrWhiteSpace(Amount)&& Amount!="0")
             {
                 Indicator = "True";
                 //var response = await loginRepository.RegistrationOtp(Mobile);

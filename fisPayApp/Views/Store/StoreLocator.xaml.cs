@@ -1,6 +1,9 @@
+using CommunityToolkit.Maui.Views;
 using fisPayApp.Handlers;
 using fisPayApp.Models;
 using fisPayApp.ViewModels;
+using fisPayApp.Views.Payments;
+using MauiApp1;
 using Newtonsoft.Json;
 
 namespace fisPayApp;
@@ -8,6 +11,7 @@ namespace fisPayApp;
 public partial class StoreLocator : ContentPage
 {
     private readonly List<string> cityStr;
+    
     public StoreLocator()
 	{
 		InitializeComponent();
@@ -15,6 +19,7 @@ public partial class StoreLocator : ContentPage
         BindingContext= storeLocatorVM;
         List<CityList> CL = JsonConvert.DeserializeObject<List<CityList>>(Validation.city().ToString());
         cityStr = CL.Select(s => s.City).ToList();
+        Routing.RegisterRoute(nameof(MobilePay), typeof(MobilePay));
     }
 
     private void Entry_TextChanged(object sender, TextChangedEventArgs e)
@@ -36,5 +41,16 @@ public partial class StoreLocator : ContentPage
         xCity.Text = xList.SelectedItem.ToString();
         xFrame.IsVisible = false;
         xList.ItemsSource = null;
+    }
+    private void ClearListView(object sender, EventArgs e)
+    {
+        xFrame.IsVisible = false;
+        xList.ItemsSource = null;
+    }
+
+    private void xStoreList_ItemTapped(object sender, ItemTappedEventArgs e)
+    {
+        var popUpData = new StorePopup(e.Item as StoreList);
+        this.ShowPopup(popUpData);
     }
 }

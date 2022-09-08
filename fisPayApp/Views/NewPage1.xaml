@@ -4,4 +4,8 @@
              x:Class="fisPayApp.Views.NewPage1"
              Title="Test Page">
 
+    <StackLayout>
+        <Label x:Name="lbl"/>
+    </StackLayout>
+
 </ContentPage>

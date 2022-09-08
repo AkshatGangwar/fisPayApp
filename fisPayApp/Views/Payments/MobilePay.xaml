@@ -10,10 +10,8 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Frame Grid.Row="0" BackgroundColor="Transparent" BorderColor="Transparent" HeightRequest="100" WidthRequest="100" HorizontalOptions="Center" CornerRadius="30" Padding="0" Margin="10">
-                <Image Source="user.png" Aspect="AspectFill" Margin="5" />
-            </Frame>
-            <Frame Grid.Row="1" CornerRadius="15" Margin="10,10,5,10" WidthRequest="250" BackgroundColor="White">
+            <Frame Grid.Row="0" BackgroundColor="Transparent" BorderColor="Transparent" HeightRequest="100" WidthRequest="100" HorizontalOptions="Center" CornerRadius="30" Padding="0" Margin="10"/>
+            <Frame Grid.Row="1" CornerRadius="15" Margin="10,10,5,10" WidthRequest="250" BorderColor="LightGreen" BackgroundColor="White">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
