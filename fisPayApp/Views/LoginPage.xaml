@@ -56,7 +56,7 @@
                     </StackLayout>
                 </StackLayout>
                 <Frame BackgroundColor="Transparent" BorderColor="Transparent" HeightRequest="50" WidthRequest="50" Padding="0" Margin="5">
-                    <ActivityIndicator IsRunning="True" IsVisible="{Binding Signing}" Color="#58D68D"/>
+                    <ActivityIndicator IsRunning="False" IsVisible="{Binding Signing}" Color="#58D68D"/>
                 </Frame>
                 <Button Text="SIGN IN" BackgroundColor="#58D68D" TextColor="White" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0" Command="{Binding LoginCommand}"/>
                 <Button Text="DevPage" IsVisible="True" BackgroundColor="#58D68D" TextColor="White" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0" Command="{Binding DevPageCommand}"/>

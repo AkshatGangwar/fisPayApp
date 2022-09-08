@@ -82,14 +82,62 @@ namespace fisPayApp.ViewModels
         [ObservableProperty]
         private string password;
         [ObservableProperty]
+        private string latitude;
+        [ObservableProperty]
+        private string longitude;
+        [ObservableProperty]
         private string indicator = "False";
         readonly ILoginRepository loginRepository = new LoginService();
         [RelayCommand]
-        async void SignUp()
+        public void SignUp()
         {
             if (!string.IsNullOrWhiteSpace(Address) && !string.IsNullOrWhiteSpace(City) && !string.IsNullOrWhiteSpace(District) && !string.IsNullOrWhiteSpace(State) && !string.IsNullOrWhiteSpace(Landmark) && !string.IsNullOrWhiteSpace(Zip) && !string.IsNullOrWhiteSpace(Password))
             {
                 Indicator = "True";
+                OnGetPosition();
+            }
+            else
+            {
+                CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+                var toast = Toast.Make("Enter Address/City/District/State/Landmark/PIN Code/Password to Proceed...", ToastDuration.Short, 18);
+                _ = toast.Show(cancellationTokenSource.Token);
+            }
+        }
+        [RelayCommand]
+        async void LoginPage()
+        {
+            await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
+        }
+        async void OnGetPosition()
+        {
+            if (IsBusy)
+                return;
+
+            IsBusy = true;
+            try
+            {
+                string adrs = Name + " " + Address + " " + Landmark + " " + City + " " + District + " " + State + " " + "IN" + " " + Zip;
+                var locations = await Geocoding.GetLocationsAsync(adrs);
+                var location = locations?.FirstOrDefault();
+                if (location == null)
+                {
+                    Latitude = "";
+                    Longitude = "";
+                }
+                else
+                {
+                    Latitude = location.Latitude.ToString();
+                    Longitude = location.Longitude.ToString();
+                }
+            }
+            catch (Exception)
+            {
+                Latitude = "";
+                Longitude = "";
+            }
+            finally
+            {
+                IsBusy = false;
                 var response = await loginRepository.RegisterVendor(new VendorProfileData
                 {
                     name = Maalik,
@@ -105,8 +153,10 @@ namespace fisPayApp.ViewModels
                     address = Address,
                     zipcode = Zip,
                     landmark = Landmark,
-                    userType="2",
-                    isActive="true"
+                    userType = "2",
+                    isActive = "true",
+                    latitude = Latitude,
+                    longitude = Longitude
                 });
                 if (response.resultCode.statusCode == "200")
                 {
@@ -125,17 +175,6 @@ namespace fisPayApp.ViewModels
                     _ = toast.Show(cancellationTokenSource.Token);
                 }
             }
-            else
-            {
-                CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-                var toast = Toast.Make("Enter Address/City/District/State/Landmark/PIN Code/Password to Proceed...", ToastDuration.Short, 18);
-                _ = toast.Show(cancellationTokenSource.Token);
-            }
-        }
-        [RelayCommand]
-        async void LoginPage()
-        {
-            await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
         }
     }
 }

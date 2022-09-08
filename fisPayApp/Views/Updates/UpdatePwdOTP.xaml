@@ -31,8 +31,8 @@
                     </Frame>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" Margin="0,10,0,0" Padding="0">
-                    <StackLayout HorizontalOptions="EndAndExpand">
-                        <Entry Text="{Binding LblResendText}" x:Name="lblResend" TextColor="#1D8348" WidthRequest="100" IsReadOnly="True" FontAttributes="Bold"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
+                    <StackLayout HorizontalOptions="Start">
+                        <Entry Text="{Binding LblResendText}" x:Name="lblResend" TextColor="#1D8348" WidthRequest="150" IsReadOnly="True" FontAttributes="Bold"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
                             <Entry.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding ResendCommand}" Tapped="lbl_TappedResend"/>
                             </Entry.GestureRecognizers>

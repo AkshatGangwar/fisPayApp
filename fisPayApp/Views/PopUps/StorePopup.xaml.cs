@@ -6,33 +6,43 @@ namespace MauiApp1;
 
 public partial class StorePopup : Popup
 {
-    private string storeName;
-    private string storeID;
-    private string latitude;
-    private string longitude;
+    private readonly StoreList storeList;
 
     public StorePopup(StoreList item)
 	{
         InitializeComponent();
-        storeID = item.storeId;
-        storeName = item.storeName;
-        latitude = item.latitude;
-        longitude = item.longitude;
+        storeList = item;
     }
 
     private async void Pay(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync($"{nameof(MobilePay)}?name={storeName}&userId={storeID}");
+        await Shell.Current.GoToAsync($"{nameof(MobilePay)}?name={storeList.storeName}&userId={storeList.storeId}");
         Close();
     }
 
     private async void OpenMap(object sender, EventArgs e)
     {
-        await Map.OpenAsync(double.Parse(latitude), double.Parse(longitude), new MapLaunchOptions
+        await Map.OpenAsync(double.Parse(storeList.latitude), double.Parse(storeList.longitude), new MapLaunchOptions
         {
-            Name = storeName,
+            Name = storeList.storeName,
             NavigationMode = 0
         });
         Close();
+    }
+    async void OpenPlacemark(object sender, EventArgs e)
+    {
+        var placemark = new Placemark
+        {
+            Locality = storeList.city,
+            AdminArea = storeList.state,
+            CountryName = storeList.country,
+            Thoroughfare = storeList.storeName+ " " + storeList.address+" "+ storeList.landmark,
+            PostalCode = storeList.zipcode
+        };
+        await Map.OpenAsync(placemark, new MapLaunchOptions
+        {
+            Name = storeList.storeName,
+            NavigationMode = 0
+        });
     }
 }

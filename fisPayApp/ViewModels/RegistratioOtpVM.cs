@@ -53,10 +53,10 @@ namespace fisPayApp.ViewModels
             {
                 Indicator = "True";
                 await Task.Delay(1500);
-                //var response = await loginRepository.RegistrationOtp(MobileNum);
-                //OTP = response.dataObject.data.otp;
-                var response = "1234";
-                OTP = response;
+                var response = await loginRepository.RegistrationOtp(MobileNum);
+                OTP = response.dataObject.data.otp;
+                //var response = "1234";
+                //OTP = response;
                 if (response != null)
                 {
                     Indicator = "False";

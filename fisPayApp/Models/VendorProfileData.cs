@@ -23,6 +23,8 @@ namespace fisPayApp.Models
         public string password { get; set; }
         public string userType { get; set; }
         public string isActive { get; set; }
+        public string latitude { get; set; }
+        public string longitude { get; set; }
 
     }
 }

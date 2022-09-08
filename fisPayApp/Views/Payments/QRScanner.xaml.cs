@@ -8,19 +8,37 @@ namespace fisPayApp.Views.Payments;
 
 public partial class QRScanner : ContentPage
 {
+    private string id;
     readonly ILoginRepository loginRepository = new LoginService();
     public QRScanner()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
         Routing.RegisterRoute(nameof(MobilePay), typeof(MobilePay));
     }
     private void CameraBarcodeReaderView_BarcodesDetected(object sender, BarcodeDetectionEventArgs e)
     {
-        Dispatcher.Dispatch(() =>
+        if (IsBusy)
+            return;
+
+        IsBusy = true;
+        try
         {
-            string id = $"{e.Results[0].Value}";
-            Next(id);
+            Dispatcher.Dispatch(() =>
+        {
+            id = $"{e.Results[0].Value}";
+
         });
+        }
+        catch (Exception)
+        {
+            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+            var toast = Toast.Make("Error", ToastDuration.Short, 18);
+            _ = toast.Show(cancellationTokenSource.Token);
+        }
+        finally
+        {
+            Next(id);
+        }
     }
     private async void Next(string id)
     {
@@ -46,7 +64,7 @@ public partial class QRScanner : ContentPage
                 var toast = Toast.Make("Error", ToastDuration.Short, 18);
                 _ = toast.Show(cancellationTokenSource.Token);
             }
-            
+
         }
         else
         {

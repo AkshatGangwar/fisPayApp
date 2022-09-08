@@ -15,9 +15,5 @@
         public string zipcode { get; set; }
         public string latitude { get; set; }
         public string longitude { get; set; }
-        public string geocode
-        {
-            get => $"{latitude},{longitude}";
-        }
     }
 }

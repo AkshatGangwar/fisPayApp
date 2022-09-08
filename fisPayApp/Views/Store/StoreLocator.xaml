@@ -31,7 +31,7 @@
                 </Frame.GestureRecognizers>
             </Frame>
         </StackLayout>
-        <ListView x:Name="xStoreList" SelectionMode="None" ItemTapped="xStoreList_ItemTapped" ItemsSource="{Binding StoreLists}" RowHeight="150"  >
+        <ListView x:Name="xStoreList" SelectionMode="None" BackgroundColor="Transparent" ItemTapped="xStoreList_ItemTapped" ItemsSource="{Binding StoreLists}" RowHeight="150"  >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

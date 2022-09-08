@@ -7,6 +7,7 @@ using CommunityToolkit.Maui.Alerts;
 using fisPayApp.Models;
 using System.Collections.ObjectModel;
 using fisPayApp.Views.Payments;
+using Microsoft.Maui.Controls;
 
 namespace fisPayApp.ViewModels
 {
@@ -14,9 +15,6 @@ namespace fisPayApp.ViewModels
     {
         ObservableCollection<StoreList> storeLists;
         CancellationTokenSource cts;
-        string notAvailable = "not available";
-        [ObservableProperty]
-        private string currentLocation;
         public ObservableCollection<StoreList> StoreLists
         {
             get
@@ -45,32 +43,46 @@ namespace fisPayApp.ViewModels
         async void GetStoreByCity()
         {
             StoreLists = null;
-            if (!string.IsNullOrWhiteSpace(City))
-            {
-                Indicator = "True";
-                var response = await loginRepository.GetStoreList(City);
-                if (response != null)
-                {
-                    List<StoreList> LT = response.dataObject.data;
-                    StoreLists = new ObservableCollection<StoreList>(LT);
-                    Indicator = "False";
-                }
+            if (IsBusy)
+                return;
 
+            IsBusy = true;
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(City))
+                {
+                    Indicator = "True";
+                    var response = await loginRepository.GetStoreList(City);
+                    if (response != null)
+                    {
+                        List<StoreList> LT = response.dataObject.data;
+                        StoreLists = new ObservableCollection<StoreList>(LT);
+                        Indicator = "False";
+                    }
+
+                    else
+                    {
+                        Indicator = "False";
+                        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+                        var toast = Toast.Make("Error", ToastDuration.Short, 18);
+                        _ = toast.Show(cancellationTokenSource.Token);
+                    }
+                }
                 else
                 {
                     Indicator = "False";
                     CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-                    var toast = Toast.Make("Error", ToastDuration.Short, 18);
+                    var toast = Toast.Make("Enter City to Search...", ToastDuration.Short, 18);
                     _ = toast.Show(cancellationTokenSource.Token);
                 }
             }
-            else
+            catch (Exception)
             {
-                Indicator = "False";
                 CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-                var toast = Toast.Make("Enter City to Search...", ToastDuration.Short, 18);
+                var toast = Toast.Make("Error", ToastDuration.Short, 18);
                 _ = toast.Show(cancellationTokenSource.Token);
             }
+            IsBusy = false;
         }
         [RelayCommand]
         async void GetStoreByGps()
@@ -85,11 +97,35 @@ namespace fisPayApp.ViewModels
                 var request = new GeolocationRequest(0);
                 cts = new CancellationTokenSource();
                 var location = await Geolocation.GetLocationAsync(request, cts.Token);
-                CurrentLocation = FormatLocation(location);
+                try
+                {
+                    IEnumerable<Placemark> placemarks = await Geocoding.Default.GetPlacemarksAsync(location.Latitude, location.Longitude);
+
+                    Placemark placemark = placemarks?.FirstOrDefault();
+                    if (placemark == null)
+                    {
+                        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+                        var toast = Toast.Make("Error", ToastDuration.Short, 18);
+                        _ = toast.Show(cancellationTokenSource.Token);
+                    }
+                    else
+                    {
+                        City = placemark.Locality;
+                        GetStoreByCity();
+                    }
+                }
+                catch (Exception)
+                {
+                    CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+                    var toast = Toast.Make("Error", ToastDuration.Short, 18);
+                    _ = toast.Show(cancellationTokenSource.Token);
+                }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                CurrentLocation = FormatLocation(null, ex);
+                CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+                var toast = Toast.Make("Error", ToastDuration.Short, 18);
+                _ = toast.Show(cancellationTokenSource.Token);
             }
             finally
             {
@@ -102,26 +138,6 @@ namespace fisPayApp.ViewModels
         async void Pay()
         {
             await Shell.Current.GoToAsync($"{nameof(MobilePay)}?name={StoreName}&userId={StoreID}");
-        }
-        string FormatLocation(Location location, Exception ex = null)
-        {
-            if (location == null)
-            {
-                return $"Unable to detect location. Exception: {ex?.Message ?? string.Empty}";
-            }
-
-            return
-                $"Latitude: {location.Latitude}\n" +
-                $"Longitude: {location.Longitude}\n" +
-                $"HorizontalAccuracy: {location.Accuracy}\n" +
-                $"Altitude: {(location.Altitude.HasValue ? location.Altitude.Value.ToString() : notAvailable)}\n" +
-                $"AltitudeRefSys: {location.AltitudeReferenceSystem.ToString()}\n" +
-                $"VerticalAccuracy: {(location.VerticalAccuracy.HasValue ? location.VerticalAccuracy.Value.ToString() : notAvailable)}\n" +
-                $"Heading: {(location.Course.HasValue ? location.Course.Value.ToString() : notAvailable)}\n" +
-                $"Speed: {(location.Speed.HasValue ? location.Speed.Value.ToString() : notAvailable)}\n" +
-                $"Date (UTC): {location.Timestamp:d}\n" +
-                $"Time (UTC): {location.Timestamp:T}\n" +
-                $"Moking Provider: {location.IsFromMockProvider}";
         }
     }
 }
