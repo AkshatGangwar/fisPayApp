@@ -6,7 +6,9 @@ public partial class TxnHistory : ContentPage
 {
 	public TxnHistory()
 	{
-		InitializeComponent();
-        BindingContext = new  TransactionsVM();
+		var transactionsVM= new TransactionsVM();
+        InitializeComponent();
+        BindingContext = transactionsVM;
+        transactionsVM.GetTxn();
     }
 }

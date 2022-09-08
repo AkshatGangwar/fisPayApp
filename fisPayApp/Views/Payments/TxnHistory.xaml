@@ -4,6 +4,7 @@
              x:Class="MauiApp1.TxnHistory"
              Title="Transactions History">
     <StackLayout Spacing="0" Orientation="Vertical" HorizontalOptions="CenterAndExpand" Margin="20,20,20,0" >
+        <ActivityIndicator IsRunning="True" IsVisible="{Binding Indicator}" VerticalOptions="Center" Color="#58D68D"/>
         <ListView ItemsSource="{Binding Transactions}" Margin="0,20,0,0">
             <ListView.ItemTemplate>
                 <DataTemplate>

@@ -29,61 +29,78 @@ namespace fisPayApp.ViewModels
         private string password;
 
         [ObservableProperty]
-        private string signing="False";
+        private string signing = "False";
         readonly ILoginRepository loginRepository = new LoginService();
 
         [RelayCommand]
         public async void Login()
         {
-            if (!string.IsNullOrWhiteSpace(UserMobile) && !string.IsNullOrWhiteSpace(Password))
+            if (IsBusy)
+                return;
+
+            IsBusy = true;
+            try
             {
-                Signing = "True";
-                var response = await loginRepository.Login(new LoginRequest
+                if (!string.IsNullOrWhiteSpace(UserMobile) && !string.IsNullOrWhiteSpace(Password))
                 {
-                    mobile = UserMobile,
-                    password = Password
-                });
-                if (response != null)
-                {
-                    response.dataObject.data.mobile = UserMobile;
-                    if (Preferences.ContainsKey(nameof(App.UserDetails)))
+                    Signing = "True";
+                    var response = await loginRepository.Login(new LoginRequest
                     {
-                        Preferences.Remove(nameof(App.UserDetails));
+                        mobile = UserMobile,
+                        password = Password
+                    });
+                    if (response != null)
+                    {
+                        response.dataObject.data.mobile = UserMobile;
+                        if (Preferences.ContainsKey(nameof(App.UserDetails)))
+                        {
+                            Preferences.Remove(nameof(App.UserDetails));
+                        }
+                        await SecureStorage.SetAsync(nameof(App.Token), response.dataObject.data.token);
+                        string userDetailStr = JsonConvert.SerializeObject(response.dataObject.data);
+                        Preferences.Set(nameof(App.UserDetails), userDetailStr);
+                        App.UserDetails = response.dataObject.data;
+                        App.Token = response.dataObject.data.token;
+                        Signing = "False";
+                        await AppConstant.AddFlyoutMenusDetails();
                     }
-                    await SecureStorage.SetAsync(nameof(App.Token), response.dataObject.data.token);
-                    string userDetailStr = JsonConvert.SerializeObject(response.dataObject.data);
-                    Preferences.Set(nameof(App.UserDetails), userDetailStr);
-                    App.UserDetails = response.dataObject.data;
-                    App.Token = response.dataObject.data.token;
-                    Signing = "False";
-                    await AppConstant.AddFlyoutMenusDetails();
+                    else
+                    {
+                        Signing = "False";
+                        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+                        var toast = Toast.Make("Invalid Credentials!", ToastDuration.Short, 18);
+                        _ = toast.Show(cancellationTokenSource.Token);
+                    }
                 }
                 else
                 {
-                    Signing = "False";
                     CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-                    var toast = Toast.Make("Invalid Credentials!",ToastDuration.Short,18);
+                    var toast = Toast.Make("");
+                    if (string.IsNullOrWhiteSpace(UserMobile) && string.IsNullOrWhiteSpace(Password))
+                    {
+                        toast = Toast.Make("Enter Mobile Number and Password to Signin", ToastDuration.Short, 18);
+                    }
+                    else if (string.IsNullOrWhiteSpace(UserMobile))
+                    {
+                        toast = Toast.Make("Enter Mobile Number to Signin", ToastDuration.Short, 18);
+                    }
+                    else
+                    {
+                        toast = Toast.Make("Enter Password to Signin", ToastDuration.Short, 18);
+                    }
+
                     _ = toast.Show(cancellationTokenSource.Token);
                 }
             }
-            else
+            catch (Exception)
             {
                 CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-                var toast = Toast.Make("");
-                if (string.IsNullOrWhiteSpace(UserMobile) && string.IsNullOrWhiteSpace(Password))
-                {
-                    toast = Toast.Make("Enter Mobile Number and Password to Signin", ToastDuration.Short, 18);
-                }
-                else if (string.IsNullOrWhiteSpace(UserMobile))
-                {
-                    toast = Toast.Make("Enter Mobile Number to Signin", ToastDuration.Short, 18);
-                }
-                else
-                {
-                    toast = Toast.Make("Enter Password to Signin", ToastDuration.Short, 18);
-                }
-
+                var toast = Toast.Make("Error", ToastDuration.Short, 18);
                 _ = toast.Show(cancellationTokenSource.Token);
+            }
+            finally
+            {
+                IsBusy = false;
             }
         }
 
@@ -92,7 +109,7 @@ namespace fisPayApp.ViewModels
         {
             await Shell.Current.GoToAsync($"{nameof(ForgotPwd)}?mobileNum={UserMobile}");
         }
-        [RelayCommand] 
+        [RelayCommand]
         public async void RegisterPage()
         {
             await Shell.Current.GoToAsync(nameof(RegistrationPage));

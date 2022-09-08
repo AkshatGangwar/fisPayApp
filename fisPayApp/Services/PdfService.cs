@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
 using fisPayApp.Interfaces;
+using fisPayApp.Models;
+using Newtonsoft.Json;
 
 namespace fisPayApp.Services
 {
@@ -64,6 +66,52 @@ namespace fisPayApp.Services
                     _ = toast.Show(cancellationTokenSource.Token);
                     return null;
                 }  
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        public async Task<TxnListResponse> getTXN()
+        {
+            try
+            {
+                string url = "https://fispayapi.azurewebsites.net/api/Person/GetWalletHistoryByUserId";
+                if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
+                {
+                    var httpClientHandler = new HttpClientHandler();
+                    httpClientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; };
+                    var client = new HttpClient(httpClientHandler);
+                    if (!string.IsNullOrWhiteSpace(App.Token))
+                    {
+                        client.DefaultRequestHeaders.Add("Authorization", "Bearer " + App.Token);
+                    }
+                    HttpResponseMessage response = null;
+                    response = await client.GetAsync(url);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var content = await response.Content.ReadAsStringAsync();
+                        if (content != null)
+                        {
+                            return JsonConvert.DeserializeObject<TxnListResponse>(content.ToString());
+                        }
+                        else
+                        {
+                            return null;
+                        }
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                else
+                {
+                    CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+                    var toast = Toast.Make("No Connection", ToastDuration.Short, 18);
+                    _ = toast.Show(cancellationTokenSource.Token);
+                    return null;
+                }
             }
             catch (Exception)
             {

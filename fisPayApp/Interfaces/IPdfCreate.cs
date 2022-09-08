@@ -10,5 +10,6 @@ namespace fisPayApp.Interfaces
     public interface IPdfCreate
     {
         Task<string> getPdf(string from, string to);
+        Task<TxnListResponse> getTXN();
     }
 }

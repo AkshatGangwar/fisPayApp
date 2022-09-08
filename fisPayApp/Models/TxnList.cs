@@ -10,7 +10,7 @@
         public string comment { get; set; }
         public string date
         {
-            get => $"{txnDate.Date.ToString("dd/MM/")}";
+            get => $"{txnDate.Date.ToString("dd/MM/yyyy")}";
         }
         public string desc
         {

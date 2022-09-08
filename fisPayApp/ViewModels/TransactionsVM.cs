@@ -1,11 +1,17 @@
-﻿using fisPayApp.Models;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.ComponentModel;
+using fisPayApp.Interfaces;
+using fisPayApp.Models;
+using fisPayApp.Services;
 using System.Collections.ObjectModel;
 
 namespace fisPayApp.ViewModels
 {
-    public partial class TransactionsVM: BaseVM
+    public partial class TransactionsVM : BaseVM
     {
         ObservableCollection<TxnList> transactions;
+        readonly IPdfCreate pdfCreate = new PdfService();
         public ObservableCollection<TxnList> Transactions
         {
             get
@@ -16,6 +22,36 @@ namespace fisPayApp.ViewModels
             {
                 transactions = value;
                 OnPropertyChanged();
+            }
+        }
+        [ObservableProperty]
+        private string indicator = "False";
+        public async void GetTxn()
+        {
+            if (IsBusy)
+                return;
+
+            IsBusy = true;
+            try
+            {
+                Indicator = "True";
+                var response = await pdfCreate.getTXN();
+                if (response != null)
+                {
+                    Transactions = new ObservableCollection<TxnList>(response.dataObject.data);
+                }
+            }
+            catch (Exception)
+            {
+                Indicator = "False";
+                CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+                var toast = Toast.Make("Error", ToastDuration.Short, 18);
+                _ = toast.Show(cancellationTokenSource.Token);
+            }
+            finally
+            {
+                IsBusy = false;
+                Indicator = "False";
             }
         }
     }

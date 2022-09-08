@@ -6,8 +6,6 @@ using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Maui.Alerts;
 using fisPayApp.Models;
 using System.Collections.ObjectModel;
-using fisPayApp.Views.Payments;
-using Microsoft.Maui.Controls;
 
 namespace fisPayApp.ViewModels
 {
@@ -30,12 +28,6 @@ namespace fisPayApp.ViewModels
         [ObservableProperty]
         private string city;
         [ObservableProperty]
-        private string storeName;
-        [ObservableProperty]
-        private string storeID;
-        [ObservableProperty]
-        private string geoCode;
-        [ObservableProperty]
         private string indicator = "False";
         readonly ILoginRepository loginRepository = new LoginService();
         
@@ -55,8 +47,7 @@ namespace fisPayApp.ViewModels
                     var response = await loginRepository.GetStoreList(City);
                     if (response != null)
                     {
-                        List<StoreList> LT = response.dataObject.data;
-                        StoreLists = new ObservableCollection<StoreList>(LT);
+                        StoreLists = new ObservableCollection<StoreList>(response.dataObject.data);
                         Indicator = "False";
                     }
 
@@ -82,7 +73,10 @@ namespace fisPayApp.ViewModels
                 var toast = Toast.Make("Error", ToastDuration.Short, 18);
                 _ = toast.Show(cancellationTokenSource.Token);
             }
-            IsBusy = false;
+            finally
+            {
+                IsBusy = false;
+            }
         }
         [RelayCommand]
         async void GetStoreByGps()
@@ -133,11 +127,6 @@ namespace fisPayApp.ViewModels
                 cts = null;
             }
             IsBusy = false;
-        }
-        [RelayCommand]
-        async void Pay()
-        {
-            await Shell.Current.GoToAsync($"{nameof(MobilePay)}?name={StoreName}&userId={StoreID}");
         }
     }
 }
