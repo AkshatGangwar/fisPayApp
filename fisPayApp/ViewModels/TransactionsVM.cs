@@ -26,6 +26,8 @@ namespace fisPayApp.ViewModels
         }
         [ObservableProperty]
         private string indicator = "False";
+        [ObservableProperty]
+        private string headerIndicator = "False";
         public async void GetTxn()
         {
             if (IsBusy)
@@ -38,6 +40,7 @@ namespace fisPayApp.ViewModels
                 var response = await pdfCreate.getTXN();
                 if (response != null)
                 {
+                    HeaderIndicator = "True";
                     Transactions = new ObservableCollection<TxnList>(response.dataObject.data);
                 }
             }

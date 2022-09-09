@@ -10,7 +10,7 @@
                 <Frame BackgroundColor="White" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
                     <Image Source="person.png" Aspect="AspectFill" Margin="5"></Image>
                 </Frame>
-                <Entry Text="{Binding Name}" Keyboard="Text" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0" Placeholder="Name" />
+                <Entry Text="{Binding Username}" Keyboard="Text" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0" Placeholder="Name" />
             </StackLayout>
         </Frame>
         <Frame BackgroundColor="Transparent" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
@@ -18,7 +18,7 @@
                 <Frame BackgroundColor="White" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
                     <Image Source="email.png" Aspect="AspectFill" Margin="5"></Image>
                 </Frame>
-                <Entry Text="{Binding Email}" Keyboard="Email" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0" Placeholder="Email" />
+                <Entry Text="{Binding Useremail}" Keyboard="Email" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0" Placeholder="Email" />
             </StackLayout>
         </Frame>
         <Frame BackgroundColor="Transparent" BorderColor="Transparent" HeightRequest="50" WidthRequest="50" Padding="0" Margin="5">

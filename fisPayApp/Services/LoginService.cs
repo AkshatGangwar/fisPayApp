@@ -10,7 +10,7 @@ namespace fisPayApp.Services
 {
     public class LoginService : ILoginRepository
     {
-        private async Task<string> ServiceRequest(string url, string data, string type)
+        private async Task<string> ServiceRequest(string url, string data, string type, MultipartFormDataContent parms)
         {
             if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
             {
@@ -29,8 +29,7 @@ namespace fisPayApp.Services
                 }
                 else if (type == "Put")
                 {
-                    StringContent body = new StringContent(data, Encoding.UTF8, "application/json");
-                    response = await client.PutAsync(url, body);
+                    response = await client.PutAsync(url, parms);
                 }
                 else
                 {
@@ -61,7 +60,7 @@ namespace fisPayApp.Services
             {
                     string loginRequestStr = JsonConvert.SerializeObject(loginRequest);
                     string url = "https://fispayapi.azurewebsites.net/api/Authentication/Login";
-                    var content = await ServiceRequest(url, loginRequestStr, "Post");
+                    var content = await ServiceRequest(url, loginRequestStr, "Post",null);
                 if (content != null)
                 {
                     return JsonConvert.DeserializeObject<LoginResponse>(content.ToString());
@@ -82,7 +81,7 @@ namespace fisPayApp.Services
             try
             {
                 string url = "https://fispayapi.azurewebsites.net/api/Authentication/GetPersonProfile";
-                var content = await ServiceRequest(url, UserID, "Get");
+                var content = await ServiceRequest(url, UserID, "Get", null);
                 if (content != null)
                 {
                     return JsonConvert.DeserializeObject<PersonProfileResponse>(content.ToString());
@@ -103,7 +102,7 @@ namespace fisPayApp.Services
             try
             {
                  string url = "https://fispayapi.azurewebsites.net/api/Authentication/GetVendorProfile";
-                    var content = await ServiceRequest(url, UserID, "Get");
+                    var content = await ServiceRequest(url, UserID, "Get", null);
                     if (content != null)
                     {
                         return JsonConvert.DeserializeObject<VendorProfileResponse>(content.ToString());
@@ -123,7 +122,7 @@ namespace fisPayApp.Services
             try
             {
                 string url = "https://fispayapi.azurewebsites.net/api/Vendor/GetStoreByCity";
-                var content = await ServiceRequest(url, City, "Get");
+                var content = await ServiceRequest(url, City, "Get", null);
                 if (content != null)
                 {
                     return JsonConvert.DeserializeObject<StoreResponse>(content.ToString());
@@ -144,7 +143,7 @@ namespace fisPayApp.Services
             try
             {
               string url = "https://fispayapi.azurewebsites.net/api/Authentication/Logoff";
-                    var content = await ServiceRequest(url, UserID, "Get");
+                    var content = await ServiceRequest(url, UserID, "Get", null);
                     if (content != null)
                     {
                         return JsonConvert.DeserializeObject<Response>(content.ToString());
@@ -164,7 +163,7 @@ namespace fisPayApp.Services
             try
             {
                 string url = "https://fispayapi.azurewebsites.net/api/Authentication/GetUserAssociateWIthStore";
-                var content = await ServiceRequest(url, ID, "Get");
+                var content = await ServiceRequest(url, ID, "Get", null);
                 if (content != null)
                 {
                     return JsonConvert.DeserializeObject<UserResponse>(content.ToString());
@@ -186,7 +185,7 @@ namespace fisPayApp.Services
             {
              string personProfileDataStr = JsonConvert.SerializeObject(personProfileData);
                     string url = "https://fispayapi.azurewebsites.net/api/Authentication/RegisterPerson";
-                    var content = await ServiceRequest(url, personProfileDataStr, "Post");
+                    var content = await ServiceRequest(url, personProfileDataStr, "Post", null);
                     if (content != null)
                     {
                         return JsonConvert.DeserializeObject<Response>(content.ToString());
@@ -208,7 +207,7 @@ namespace fisPayApp.Services
             {
                 string vendorProfileDataStr = JsonConvert.SerializeObject(vendorProfileData);
                     string url = "https://fispayapi.azurewebsites.net/api/Authentication/RegisterVendor";
-                    var content = await ServiceRequest(url, vendorProfileDataStr, "Post");
+                    var content = await ServiceRequest(url, vendorProfileDataStr, "Post", null);
                     if (content != null)
                     {
                         return JsonConvert.DeserializeObject<Response>(content.ToString());
@@ -229,7 +228,7 @@ namespace fisPayApp.Services
             try
             {
                string url = "https://fispayapi.azurewebsites.net/api/Authentication/GetOTP";
-                    var content = await ServiceRequest(url, Mobile, "Get");
+                    var content = await ServiceRequest(url, Mobile, "Get", null);
                     if (content != null)
                     {
                         return JsonConvert.DeserializeObject<OtpResponse>(content.ToString());
@@ -250,7 +249,7 @@ namespace fisPayApp.Services
             {
                 string walletRequestStr = JsonConvert.SerializeObject(walletRequest);
                 string url = "https://fispayapi.azurewebsites.net/api/Person/WalletRegistration";
-                var content = await ServiceRequest(url, walletRequestStr, "Post");
+                var content = await ServiceRequest(url, walletRequestStr, "Post", null);
                 if (content != null)
                 {
                     return JsonConvert.DeserializeObject<WalletResponse>(content.ToString());
@@ -269,9 +268,12 @@ namespace fisPayApp.Services
         {
             try
             {
-                string walletRequestStr = JsonConvert.SerializeObject(walletRequest);
+                var WalletFlag = new MultipartFormDataContent
+                {
+                    { new StringContent(walletRequest.isActivate.ToString()), "isActivate" }
+                };
                 string url = "https://fispayapi.azurewebsites.net/api/Person/WalletActivation";
-                var content = await ServiceRequest(url, walletRequestStr, "Put");
+                var content = await ServiceRequest(url, "", "Put", WalletFlag);
                 if (content != null)
                 {
                     return JsonConvert.DeserializeObject<Response>(content.ToString());
@@ -292,7 +294,7 @@ namespace fisPayApp.Services
             {
                 string walletRequestStr = JsonConvert.SerializeObject(addWalletRequest);
                 string url = "https://fispayapi.azurewebsites.net/api/Person/AddWalletAmount";
-                var content = await ServiceRequest(url, walletRequestStr, "Post");
+                var content = await ServiceRequest(url, walletRequestStr, "Post", null);
                 if (content != null)
                 {
                     return JsonConvert.DeserializeObject<Response>(content.ToString());
@@ -307,13 +309,18 @@ namespace fisPayApp.Services
                 return null;
             }
         }
-        public async Task<Response> UpdatePersonProfile(PersonProfileData personProfileData)
+        public async Task<Response> UpdatePersonProfile(UpdateUserProfile personProfileData)
         {
             try
             {
-                string personProfileDataStr = JsonConvert.SerializeObject(personProfileData);
                 string url = "https://fispayapi.azurewebsites.net/api/Authentication/UpdatePersonProfile";
-                var content = await ServiceRequest(url, personProfileDataStr, "Put");
+                var personProfileDataStr = new MultipartFormDataContent
+                {
+                    { new StringContent(personProfileData.Id), "Id" },
+                    { new StringContent(personProfileData.Name), "Name" },
+                    { new StringContent(personProfileData.Email), "Email" }
+                };
+                var content = await ServiceRequest(url, "", "Put", personProfileDataStr);
                 if (content != null)
                 {
                     return JsonConvert.DeserializeObject<Response>(content.ToString());
@@ -335,7 +342,7 @@ namespace fisPayApp.Services
             {
                 string updatePwdRequestStr = JsonConvert.SerializeObject(updatePwdRequest);
                 string url = "https://fispayapi.azurewebsites.net/api/Authentication/ForgetPassword";
-                var content = await ServiceRequest(url, updatePwdRequestStr, "Post");
+                var content = await ServiceRequest(url, updatePwdRequestStr, "Post", null);
                 if (content != null)
                 {
                     return JsonConvert.DeserializeObject<Response>(content.ToString());
@@ -356,7 +363,7 @@ namespace fisPayApp.Services
             try
             {
                string url = "https://fispayapi.azurewebsites.net/api/Authentication/UpdatePasswordOTP";
-                    var content = await ServiceRequest(url, Mobile, "Get");
+                    var content = await ServiceRequest(url, Mobile, "Get", null);
                     if (content != null)
                     {
                         return JsonConvert.DeserializeObject<OtpResponse>(content.ToString());
@@ -379,7 +386,7 @@ namespace fisPayApp.Services
                 string vendorProfileDataStr = JsonConvert.SerializeObject(vendorProfileData);
 
                     string url = "https://fispayapi.azurewebsites.net/api/Authentication/UpdateVendorProfile";
-                    var content = await ServiceRequest(url, vendorProfileDataStr, "Put");
+                    var content = await ServiceRequest(url, vendorProfileDataStr, "Put",null);
                     if (content != null)
                     {
                         return JsonConvert.DeserializeObject<Response>(content.ToString());

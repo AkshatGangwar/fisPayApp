@@ -2,12 +2,13 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiApp1.WalletPage"
+             BackgroundColor="#F0FFF0"
              Title="Wallet">
     <StackLayout>
         <StackLayout x:Name="ActWalletStack" Orientation="Vertical" Spacing="10" Margin="10">
             <Label Text="Wallet is not Activated Yet!" TextColor="DarkGreen" HorizontalTextAlignment="Center" FontSize="Subtitle" FontAttributes="Bold"/>
             <Label Text="Please Enter your PAN Number to Activate Wallet....." HorizontalTextAlignment="Center" FontSize="Subtitle" TextColor="Gray" FontAttributes="Italic"/>
-            <Frame BackgroundColor="Transparent" BorderColor="LightGreen" Padding="5" Margin="20" HorizontalOptions="FillAndExpand" CornerRadius="30">
+            <Frame BackgroundColor="White" BorderColor="LightGreen" Padding="5" Margin="20" HorizontalOptions="FillAndExpand" CornerRadius="30">
                 <Entry Text="{Binding Pan}" Placeholder="PAN Number" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="20,0,20,0"/>
             </Frame>
             <Frame BackgroundColor="Transparent" BorderColor="Transparent" HeightRequest="50" WidthRequest="50" Padding="0" Margin="5">
@@ -15,7 +16,7 @@
             </Frame>
             <Button Text="Activate" BackgroundColor="#58D68D" TextColor="White" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0" Command="{Binding ActivateCommand}"/>
         </StackLayout>
-        <StackLayout x:Name="WalletStack" Orientation="Vertical" Spacing="10" BackgroundColor="#F0FFF0">
+        <StackLayout x:Name="WalletStack" Orientation="Vertical" Spacing="10">
             <Grid HorizontalOptions="CenterAndExpand" Margin="0,30,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>

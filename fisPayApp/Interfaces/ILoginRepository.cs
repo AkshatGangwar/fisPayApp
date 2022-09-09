@@ -15,7 +15,7 @@ namespace fisPayApp.Interfaces
         Task<Response> RegisterVendor(VendorProfileData vendorProfileData);
         Task<Response> RegisterPerson(PersonProfileData personProfileData);
         Task<Response> UpdateVendorProfile(VendorProfileData vendorProfileData);
-        Task<Response> UpdatePersonProfile(PersonProfileData personProfileData);
+        Task<Response> UpdatePersonProfile(UpdateUserProfile personProfileData);
         Task<Response> UpdatePwd(UpdatePwdRequest updatePwdRequest);
         Task<WalletResponse> ActivateWallet(WalletRequest walletRequest);
         Task<Response> SetWalletFlag(WalletRequest walletRequest);

@@ -4,8 +4,43 @@
              x:Class="fisPayApp.Views.NewPage1"
              Title="Test Page">
 
-    <StackLayout>
-        <Label x:Name="lbl"/>
+    <StackLayout Spacing="0" Orientation="Vertical" Margin="20,20,20,0" >
+        <ActivityIndicator IsRunning="True" IsVisible="{Binding Indicator}" VerticalOptions="Center" Color="#58D68D"/>
+        <ListView ItemsSource="{Binding Transactions}" BackgroundColor="White" SelectionMode="None" IsEnabled="False" Header="{Binding .}">
+            <ListView.HeaderTemplate>
+                <DataTemplate>
+                    <Frame BackgroundColor="#58D68D" Padding="4">
+                        <Grid Padding="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" VerticalTextAlignment="Center" FontSize="Subtitle" FontAttributes="Bold"  HorizontalTextAlignment="Center" TextColor="White" Text="Date"/>
+                            <Label Grid.Column="1" VerticalTextAlignment="Center" FontSize="Subtitle" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="White" Text="Description" />
+                            <Label Grid.Column="2" VerticalTextAlignment="Center" FontSize="Subtitle" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="White" Text="Amount" />
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </ListView.HeaderTemplate>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Frame BackgroundColor="White" BorderColor="#58D68D" CornerRadius="0" Padding="5">
+                            <Grid Padding="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" VerticalTextAlignment="Center" FontSize="Subtitle" FontAttributes="Bold"  HorizontalTextAlignment="Center" TextColor="DarkGreen" Text="{Binding date}"/>
+                                <Label Grid.Column="1" VerticalTextAlignment="Center" FontSize="Subtitle" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="DarkGreen" Text="{Binding desc}" />
+                                <Label Grid.Column="2" VerticalTextAlignment="Center" FontSize="Subtitle" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="DarkGreen" Text="{Binding amount}" />
+                            </Grid>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </StackLayout>
-
 </ContentPage>

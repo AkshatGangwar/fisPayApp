@@ -2,41 +2,53 @@
 using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using fisPayApp.Handlers;
 using fisPayApp.Interfaces;
 using fisPayApp.Models;
 using fisPayApp.Services;
-using fisPayApp.Views;
 
 namespace fisPayApp.ViewModels
 {
     public partial class PersonProfileVM: BaseVM
     {
         [ObservableProperty]
-        private string name;
+        private string username= App.UserDetails.name;
         [ObservableProperty]
-        private string email;
+        private string useremail = App.UserDetails.emailId;
         [ObservableProperty]
         private string indicator = "False";
         readonly ILoginRepository loginRepository = new LoginService();
         [RelayCommand]
         public async void UpdatePersonProfile()
         {
-            if (!string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Email))
+            if (!string.IsNullOrWhiteSpace(Username) && !string.IsNullOrWhiteSpace(Useremail))
             {
                 Indicator = "True";
-                var response = await loginRepository.UpdatePersonProfile(new PersonProfileData
+                var response = await loginRepository.UpdatePersonProfile(new UpdateUserProfile
                 {
-                    name = Name,
-                    userId = App.UserDetails.userId,
-                    email = Email,
+                    Name = Username,
+                    Id = App.UserDetails.userId,
+                    Email = Useremail,
                 });
-                if (response.resultCode.statusCode == "200")
+                if (response!=null)
                 {
-                    Indicator = "False";
-                    CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-                    var toast = Toast.Make("Success!", ToastDuration.Short, 18);
-                    _ = toast.Show(cancellationTokenSource.Token);
-                    await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
+                    if (response.resultCode.statusCode == "200")
+                    {
+                        Indicator = "False";
+                        App.UserDetails.name = Username;
+                        App.UserDetails.emailId = Useremail;
+                        await AppConstant.AddFlyoutMenusDetails();
+                        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+                        var toast = Toast.Make("Success!", ToastDuration.Short, 18);
+                        _ = toast.Show(cancellationTokenSource.Token);
+                    }
+                    else
+                    {
+                        Indicator = "False";
+                        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+                        var toast = Toast.Make("Error!", ToastDuration.Short, 18);
+                        _ = toast.Show(cancellationTokenSource.Token);
+                    }
                 }
                 else
                 {

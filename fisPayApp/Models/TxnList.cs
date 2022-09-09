@@ -1,4 +1,6 @@
-﻿namespace fisPayApp.Models
+﻿using Java.Lang;
+
+namespace fisPayApp.Models
 {
     public class TxnList
     {
@@ -14,13 +16,14 @@
         }
         public string desc
         {
-            get {
-                if(txnMode == "C") {
-                    return "Credit";
-                } else { 
-                    return "Debit";
-                }                
-            }
+            get => $"{getdesc()}";
+        }
+        string getdesc()
+        {
+            if (txnMode == "C")
+                return "Credit";
+            else
+                return "Debit";
         }
     }
 }

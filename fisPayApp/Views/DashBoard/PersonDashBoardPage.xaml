@@ -11,7 +11,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Frame Grid.Row="0" CornerRadius="15" Margin="20,10,20,0" BackgroundColor="White">
+            <Frame Grid.Row="0" CornerRadius="15" Margin="20,10,20,0" BorderColor="LightGreen" BackgroundColor="White">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -69,7 +69,7 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <StackLayout Grid.Column="0">
-                        <Frame x:Name="Store" HeightRequest="90" WidthRequest="90" CornerRadius="15">
+                        <Frame x:Name="Store" HeightRequest="90" WidthRequest="90" BorderColor="LightGreen" CornerRadius="15">
                             <Image Source="shop.png" Aspect="AspectFill"/>
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding StoreCommand}"/>
@@ -78,7 +78,7 @@
                         <Label Text="Store Locator" HorizontalTextAlignment="Center"/>
                     </StackLayout>
                     <StackLayout Grid.Column="1">
-                        <Frame x:Name="Wallet" HeightRequest="90" WidthRequest="90" CornerRadius="15">
+                        <Frame x:Name="Wallet" HeightRequest="90" WidthRequest="90" BorderColor="LightGreen" CornerRadius="15">
                             <Image Source="wallet.png" Aspect="AspectFill"/>
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding WalletCommand}"/>
@@ -87,7 +87,7 @@
                         <Label Text="Wallet" HorizontalTextAlignment="Center"/>
                     </StackLayout>
                     <StackLayout Grid.Column="2">
-                        <Frame x:Name="Refer" HeightRequest="90" WidthRequest="90" CornerRadius="15">
+                        <Frame x:Name="Refer" HeightRequest="90" WidthRequest="90" BorderColor="LightGreen" CornerRadius="15">
                             <Image Source="moneybag.png" Aspect="AspectFill"/>
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding ReferCommand}"/>
@@ -97,7 +97,7 @@
                     </StackLayout>
                 </Grid>
             </Frame>
-            <Frame Grid.Row="2" CornerRadius="15" Margin="20,10,20,0" BackgroundColor="White">
+            <Frame Grid.Row="2" CornerRadius="15" Margin="20,10,20,0" BorderColor="LightGreen" BackgroundColor="White">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />

@@ -10,14 +10,19 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Frame Grid.Row="0" BackgroundColor="Transparent" BorderColor="Transparent" HeightRequest="100" WidthRequest="100" HorizontalOptions="Center" CornerRadius="30" Padding="0" Margin="10">
+            <Frame Grid.Row="0" BackgroundColor="White" BorderColor="LightGreen" HeightRequest="100" WidthRequest="100" HorizontalOptions="Center" CornerRadius="50" Padding="0" Margin="5">
                 <Image Source="user.png" Aspect="AspectFill" Margin="5" />
+            </Frame>
+            <Frame Grid.Row="0" HeightRequest="40" WidthRequest="40" Margin="100,0,0,0" VerticalOptions="End" HorizontalOptions="Center" BackgroundColor="Transparent" BorderColor="Transparent">
+                <Image Source="cam.png" HeightRequest="30" WidthRequest="30" Aspect="AspectFill"/>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer />
+                </Frame.GestureRecognizers>
             </Frame>
             <Frame Grid.Row="1" CornerRadius="15" Margin="10,0,0,0" BorderColor="LightGreen" BackgroundColor="White">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="200" />
-                        <ColumnDefinition Width="40" />
                         <ColumnDefinition Width="40" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
@@ -28,15 +33,10 @@
                     <Frame Grid.Row="0" Grid.Column="1" HeightRequest="40" WidthRequest="40" HorizontalOptions="EndAndExpand" BackgroundColor="Transparent" BorderColor="Transparent">
                         <Image Source="edit.png" HeightRequest="30" WidthRequest="30" Aspect="AspectFill"/>
                         <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding EditProfileCommand}" />
+                            <TapGestureRecognizer Tapped="EditProfile" />
                         </Frame.GestureRecognizers>
                     </Frame>
-                    <Frame Grid.Row="0" Grid.Column="2" HeightRequest="40" WidthRequest="40" HorizontalOptions="EndAndExpand" BackgroundColor="Transparent" BorderColor="Transparent">
-                        <Image Source="cam.png" HeightRequest="30" WidthRequest="30" Aspect="AspectFill"/>
-                        <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding UploadImageCommand}" />
-                        </Frame.GestureRecognizers>
-                    </Frame>
+                    
                     <StackLayout Grid.Row="1" Orientation="Vertical" Spacing="10" Margin="0,5,0,0">
                         <Label x:Name="Name" TextColor="#006400" FontSize="Title" />
                         <Label x:Name="Mobile" FontSize="Subtitle" />
