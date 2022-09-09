@@ -2,6 +2,9 @@
 using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using fisPayApp.Interfaces;
+using fisPayApp.Models;
+using fisPayApp.Services;
 using MauiApp1;
 
 namespace fisPayApp.ViewModels
@@ -36,37 +39,70 @@ namespace fisPayApp.ViewModels
         private string comment;
         [ObservableProperty]
         private string indicator = "False";
+        readonly ILoginRepository loginRepository = new LoginService();
         [RelayCommand]
         async void Pay()
         {
-            if (!string.IsNullOrWhiteSpace(UserId)&& !string.IsNullOrWhiteSpace(Amount)&& Amount!="0")
-            {
-                Indicator = "True";
-                //var response = await loginRepository.RegistrationOtp(Mobile);
-                await Task.Delay(1500);
-                var response = "1234";
-                if (response != null)
-                {
-                    Indicator = "False";
-                    CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-                    var toast = Toast.Make("Sucess!", ToastDuration.Short, 18);
-                    _ = toast.Show(cancellationTokenSource.Token);
-                    await Shell.Current.GoToAsync($"{nameof(PaymentSucess)}?amount={Amount}&username={Name}");
-                }
+            if (IsBusy)
+                return;
 
+            IsBusy = true;
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(UserId) && !string.IsNullOrWhiteSpace(Amount) && Amount != "0")
+                {
+                    Indicator = "True";
+                    var response = await loginRepository.Pay(new AddWalletRequest
+                    {
+                        userId = UserId,
+                        amount = Amount,
+                        comment = Comment
+                    });
+                    if (response != null)
+                    {
+                        if (response.resultCode.statusCode == "200")
+                        {
+                            Indicator = "False";
+                            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+                            var toast = Toast.Make("Sucess!", ToastDuration.Short, 18);
+                            _ = toast.Show(cancellationTokenSource.Token);
+                            await Shell.Current.GoToAsync($"{nameof(PaymentSucess)}?amount={Amount}&username={Name}");
+                        }
+                        else
+                        {
+                            Indicator = "False";
+                            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+                            var toast = Toast.Make("Error", ToastDuration.Short, 18);
+                            _ = toast.Show(cancellationTokenSource.Token);
+                        }
+
+                    }
+
+                    else
+                    {
+                        Indicator = "False";
+                        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+                        var toast = Toast.Make("Error", ToastDuration.Short, 18);
+                        _ = toast.Show(cancellationTokenSource.Token);
+                    }
+                }
                 else
                 {
-                    Indicator = "False";
                     CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-                    var toast = Toast.Make("Error", ToastDuration.Short, 18);
+                    var toast = Toast.Make("Please Enter Proper Amount...", ToastDuration.Short, 18);
                     _ = toast.Show(cancellationTokenSource.Token);
                 }
             }
-            else
+            catch (Exception)
             {
+                Indicator = "False";
                 CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-                var toast = Toast.Make("Please Enter Proper Amount...", ToastDuration.Short, 18);
+                var toast = Toast.Make("Error", ToastDuration.Short, 18);
                 _ = toast.Show(cancellationTokenSource.Token);
+            }
+            finally
+            {
+                IsBusy = false;
             }
         }
     }

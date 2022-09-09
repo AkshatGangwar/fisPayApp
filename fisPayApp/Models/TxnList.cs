@@ -1,6 +1,4 @@
-﻿using Java.Lang;
-
-namespace fisPayApp.Models
+﻿namespace fisPayApp.Models
 {
     public class TxnList
     {

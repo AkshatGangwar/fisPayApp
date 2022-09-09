@@ -309,6 +309,27 @@ namespace fisPayApp.Services
                 return null;
             }
         }
+        public async Task<Response> Pay(AddWalletRequest addWalletRequest)
+        {
+            try
+            {
+                string walletRequestStr = JsonConvert.SerializeObject(addWalletRequest);
+                string url = "https://fispayapi.azurewebsites.net/api/Person/UserPayment";
+                var content = await ServiceRequest(url, walletRequestStr, "Post", null);
+                if (content != null)
+                {
+                    return JsonConvert.DeserializeObject<Response>(content.ToString());
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
         public async Task<Response> UpdatePersonProfile(UpdateUserProfile personProfileData)
         {
             try

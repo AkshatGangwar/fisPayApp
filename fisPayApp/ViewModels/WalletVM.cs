@@ -10,7 +10,7 @@ using MauiApp1;
 
 namespace fisPayApp.ViewModels
 {
-    public partial class WalletVM: BaseVM
+    public partial class WalletVM : BaseVM
     {
         [ObservableProperty]
         private string pan;
@@ -58,36 +58,55 @@ namespace fisPayApp.ViewModels
         [RelayCommand]
         async void Add()
         {
-            if (!string.IsNullOrWhiteSpace(Amount))
-            {
-                Indicator = "True";
-                var response = await loginRepository.AddWalletAmount(new AddWalletRequest
-                {
-                    amount = Amount,
-                    comment= Comment
-                });
-                if (response.resultCode.statusCode == "200")
-                {
-                    Indicator = "False";
-                    await AppConstant.AddFlyoutMenusDetails();
-                    CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-                    var toast = Toast.Make("Ammount Added Succesfully!", ToastDuration.Short, 18);
-                    _ = toast.Show(cancellationTokenSource.Token);
-                }
+            if (IsBusy)
+                return;
 
+            IsBusy = true;
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(Amount))
+                {
+                    Indicator = "True";
+                    var response = await loginRepository.AddWalletAmount(new AddWalletRequest
+                    {
+                        userId = App.UserDetails.userId,
+                        amount = Amount,
+                        comment = Comment
+                    });
+                    if (response.resultCode.statusCode == "200")
+                    {
+                        Indicator = "False";
+                        await AppConstant.AddFlyoutMenusDetails();
+                        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+                        var toast = Toast.Make("Ammount Added Succesfully!", ToastDuration.Short, 18);
+                        _ = toast.Show(cancellationTokenSource.Token);
+                    }
+
+                    else
+                    {
+                        Indicator = "False";
+                        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+                        var toast = Toast.Make("Error!", ToastDuration.Short, 18);
+                        _ = toast.Show(cancellationTokenSource.Token);
+                    }
+                }
                 else
                 {
-                    Indicator = "False";
                     CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-                    var toast = Toast.Make("Error!", ToastDuration.Short, 18);
+                    var toast = Toast.Make("Amount cannot be null or zero...", ToastDuration.Short, 18);
                     _ = toast.Show(cancellationTokenSource.Token);
                 }
             }
-            else
+            catch (Exception)
             {
+                Indicator = "False";
                 CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-                var toast = Toast.Make("Amount cannot be null or zero...", ToastDuration.Short, 18);
+                var toast = Toast.Make("Error", ToastDuration.Short, 18);
                 _ = toast.Show(cancellationTokenSource.Token);
+            }
+            finally
+            {
+                IsBusy = false;
             }
         }
     }

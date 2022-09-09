@@ -1,9 +1,4 @@
 ﻿using fisPayApp.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace fisPayApp.Interfaces
 {
@@ -20,6 +15,7 @@ namespace fisPayApp.Interfaces
         Task<WalletResponse> ActivateWallet(WalletRequest walletRequest);
         Task<Response> SetWalletFlag(WalletRequest walletRequest);
         Task<Response> AddWalletAmount(AddWalletRequest addWalletRequest);
+        Task<Response> Pay(AddWalletRequest addWalletRequest);
         Task<PersonProfileResponse> GetPersonProfile(string UserID);
         Task<VendorProfileResponse> GetVendorProfile(string UserID);
         Task<StoreResponse> GetStoreList(string City);
