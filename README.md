@@ -42,7 +42,7 @@ Keeping in sync with our corporate goals, we are giving a Mobile app named "FPAY
 ## WorkFlow
 ![INNOVATE_ProjectFlow](https://user-images.githubusercontent.com/63618075/189882196-c3757483-622b-42ce-9602-d51a1a822edc.png)
 ## Architecture
-![Innovate48IMg-1](https://user-images.githubusercontent.com/63618075/189882272-b1b72c71-4c4f-48b4-9cac-964ac8aa69fd.png)
+![Innovate48IMg-1](https://user-images.githubusercontent.com/63618075/189883147-3e939cde-0e85-492d-aa6b-28c91bd2e494.png)
 ## License
 
 ![fislogo](https://user-images.githubusercontent.com/63618075/189873571-2e8c87cf-062f-44f1-b7eb-1a150539bc97.gif)
