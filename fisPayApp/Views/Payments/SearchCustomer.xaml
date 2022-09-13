@@ -10,7 +10,7 @@
                 <Frame BackgroundColor="White" HeightRequest="40" BorderColor="LightGreen" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
                     <Image Source="mobile.png" Aspect="AspectFill" Margin="5"/>
                 </Frame>
-                <Entry Text="{Binding MobileNum}" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="10,0,20,0" Placeholder="Mobile Number"/>
+                <Entry Text="{Binding MobileNum}" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Keyboard="Numeric" Margin="10,0,20,0" Placeholder="Mobile Number"/>
                 <Frame BackgroundColor="White" BorderColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
                     <Image Source="magnify.png" Aspect="AspectFill" Margin="5"/>
                     <Frame.GestureRecognizers>
