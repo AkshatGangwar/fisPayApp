@@ -76,7 +76,7 @@ namespace fisPayApp.Services
             }
         }
 
-        public async Task<PersonProfileResponse> GetPersonProfile(string UserID)
+        public async Task<PersonProfileResponse>GetPersonProfile(string UserID)
         {
             try
             {
@@ -85,6 +85,26 @@ namespace fisPayApp.Services
                 if (content != null)
                 {
                     return JsonConvert.DeserializeObject<PersonProfileResponse>(content.ToString());
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        public async Task<MobileSearchResponse>GetUserIdByMobile(string num)
+        {
+            try
+            {
+                string url = "https://fispayapi.azurewebsites.net/api/Authentication/GetVendorUserDetailsByMobile";
+                var content = await ServiceRequest(url, num, "Get", null);
+                if (content != null)
+                {
+                    return JsonConvert.DeserializeObject<MobileSearchResponse>(content.ToString());
                 }
                 else
                 {

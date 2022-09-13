@@ -1,6 +1,4 @@
-﻿using CommunityToolkit.Maui.Alerts;
-using CommunityToolkit.Maui.Core;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using fisPayApp.Handlers;
 using fisPayApp.Interfaces;
@@ -38,31 +36,23 @@ namespace fisPayApp.ViewModels
                         App.UserDetails.name = Username;
                         App.UserDetails.emailId = Useremail;
                         await AppConstant.AddFlyoutMenusDetails();
-                        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-                        var toast = Toast.Make("Success!", ToastDuration.Short, 18);
-                        _ = toast.Show(cancellationTokenSource.Token);
+                        Validation.toastmsg("Success!", "S", 18);
                     }
                     else
                     {
                         Indicator = "False";
-                        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-                        var toast = Toast.Make("Error!", ToastDuration.Short, 18);
-                        _ = toast.Show(cancellationTokenSource.Token);
+                        Validation.toastmsg("Error", "S", 18);
                     }
                 }
                 else
                 {
                     Indicator = "False";
-                    CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-                    var toast = Toast.Make("Error!", ToastDuration.Short, 18);
-                    _ = toast.Show(cancellationTokenSource.Token);
+                    Validation.toastmsg("Error", "S", 18);
                 }
             }
             else
             {
-                CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-                var toast = Toast.Make("Enter Name/Email to Proceed...", ToastDuration.Short, 18);
-                _ = toast.Show(cancellationTokenSource.Token);
+                Validation.toastmsg("Enter Name/Email to Proceed...", "S", 18);
             }
         }
     }

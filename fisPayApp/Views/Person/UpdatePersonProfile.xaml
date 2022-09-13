@@ -8,7 +8,7 @@
         <Frame BackgroundColor="Transparent" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
             <StackLayout Orientation="Horizontal">
                 <Frame BackgroundColor="White" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
-                    <Image Source="person.png" Aspect="AspectFill" Margin="5"></Image>
+                    <Image Source="person.png" Aspect="AspectFill" Margin="5"/>
                 </Frame>
                 <Entry Text="{Binding Username}" Keyboard="Text" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0" Placeholder="Name" />
             </StackLayout>
@@ -16,14 +16,14 @@
         <Frame BackgroundColor="Transparent" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
             <StackLayout Orientation="Horizontal">
                 <Frame BackgroundColor="White" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
-                    <Image Source="email.png" Aspect="AspectFill" Margin="5"></Image>
+                    <Image Source="email.png" Aspect="AspectFill" Margin="5"/>
                 </Frame>
                 <Entry Text="{Binding Useremail}" Keyboard="Email" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0" Placeholder="Email" />
             </StackLayout>
         </Frame>
         <Frame BackgroundColor="Transparent" BorderColor="Transparent" HeightRequest="50" WidthRequest="50" Padding="0" Margin="5">
-            <ActivityIndicator IsRunning="True" IsVisible="{Binding Indicator}" Color="#58D68D"></ActivityIndicator>
+            <ActivityIndicator IsRunning="True" IsVisible="{Binding Indicator}" Color="#58D68D"/>
         </Frame>
-        <Button Text="Update" BackgroundColor="#58D68D" TextColor="White" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0" Command="{Binding UpdatePersonProfileCommand}"></Button>
+        <Button Text="Update" BackgroundColor="#58D68D" TextColor="White" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0" Command="{Binding UpdatePersonProfileCommand}"/>
     </StackLayout>
 </ContentPage>

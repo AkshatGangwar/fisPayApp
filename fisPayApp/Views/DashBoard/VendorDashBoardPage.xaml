@@ -2,153 +2,64 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="fisPayApp.Views.DashBoard.VendorDashBoardPage"
+             Title =""
              BackgroundColor="#F0FFF0">
     <StackLayout Padding="10">
-        <Grid HorizontalOptions="CenterAndExpand" Margin="10" RowSpacing="10">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Frame Grid.Row="0" CornerRadius="15" Margin="20,10,20,0" BackgroundColor="White">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Label Text="Transfer Money" HorizontalOptions="StartAndExpand" FontSize="Subtitle"/>
-                    <HorizontalStackLayout Spacing="10" Margin="0,30,0,0">
-                        <StackLayout Grid.Column="0">
-                            <Frame x:Name="QR" HeightRequest="70" WidthRequest="70" BackgroundColor="#F0FFF0" CornerRadius="30">
-                                <Image Source="qrpay.png" HeightRequest="50" WidthRequest="50" Aspect="AspectFill"/>
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding QRPayCommand}"/>
-                                </Frame.GestureRecognizers>
-                            </Frame>
-                            <Label Text="Scan&amp;Pay" HorizontalTextAlignment="Center"/>
-                        </StackLayout>
-                        <StackLayout Grid.Column="1">
-                            <Frame x:Name="Mobile" HeightRequest="70" WidthRequest="70" BackgroundColor="#F0FFF0" CornerRadius="30">
-                                <Image Source="contactbook.png" HeightRequest="50" WidthRequest="50" Aspect="AspectFill"/>
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding MobileCommand}"/>
-                                </Frame.GestureRecognizers>
-                            </Frame>
-                            <Label Text="To Mobile" HorizontalTextAlignment="Center"/>
-                            <Label Text="Number" HorizontalTextAlignment="Center"/>
-                        </StackLayout>
-                        <StackLayout Grid.Column="2">
-                            <Frame x:Name="History" HeightRequest="70" WidthRequest="70" BackgroundColor="#F0FFF0" CornerRadius="30">
-                                <Image Source="search.png" HeightRequest="50" WidthRequest="50" Aspect="AspectFill"/>
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding HistoryCommand}"/>
-                                </Frame.GestureRecognizers>
-                            </Frame>
-                            <Label Text="History" HorizontalTextAlignment="Center"/>
-                        </StackLayout>
-                        <StackLayout Grid.Column="3">
-                            <Frame x:Name="Statement" HeightRequest="70" WidthRequest="70" BackgroundColor="#F0FFF0" CornerRadius="30">
-                                <Image Source="statement.png" HeightRequest="50" WidthRequest="50" Aspect="AspectFill"/>
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding PDFCommand}"/>
-                                </Frame.GestureRecognizers>
-                            </Frame>
-                            <Label Text="Statement" HorizontalTextAlignment="Center"/>
-                        </StackLayout>
-                    </HorizontalStackLayout>
-                </Grid>
-            </Frame>
-            <Frame Grid.Row="1" BackgroundColor="Transparent" BorderColor="Transparent" HorizontalOptions="CenterAndExpand">
-                <Grid ColumnSpacing="15">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*"  />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <StackLayout Grid.Column="0">
-                        <Frame x:Name="Store" HeightRequest="90" WidthRequest="90" CornerRadius="15">
-                            <Image Source="shop.png" Aspect="AspectFill"/>
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding StoreCommand}"/>
-                            </Frame.GestureRecognizers>
-                        </Frame>
-                        <Label Text="Store Locator" HorizontalTextAlignment="Center"/>
-                    </StackLayout>
-                    <StackLayout Grid.Column="1">
-                        <Frame x:Name="Wallet" HeightRequest="90" WidthRequest="90" CornerRadius="15">
-                            <Image Source="wallet.png" Aspect="AspectFill"/>
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding WalletCommand}"/>
-                            </Frame.GestureRecognizers>
-                        </Frame>
-                        <Label Text="Wallet" HorizontalTextAlignment="Center"/>
-                    </StackLayout>
-                    <StackLayout Grid.Column="2">
-                        <Frame x:Name="Refer" HeightRequest="90" WidthRequest="90" CornerRadius="15">
-                            <Image Source="moneybag.png" Aspect="AspectFill"/>
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding ReferCommand}"/>
-                            </Frame.GestureRecognizers>
-                        </Frame>
-                        <Label Text="Refer &amp; Earn" HorizontalTextAlignment="Center"/>
-                    </StackLayout>
-                </Grid>
-            </Frame>
-            <Frame Grid.Row="2" CornerRadius="15" Margin="20,10,20,0" BackgroundColor="White">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <HorizontalStackLayout Spacing="10" Margin="0,10,0,0">
-                        <StackLayout Grid.Column="0">
-                            <Frame x:Name="Profile" HeightRequest="70" WidthRequest="70" BackgroundColor="#F0FFF0" CornerRadius="30">
-                                <Image Source="cv.png" HeightRequest="50" WidthRequest="50" Aspect="AspectFill"/>
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding ProfileCommand}"/>
-                                </Frame.GestureRecognizers>
-                            </Frame>
-                            <Label Text="Profile" HorizontalTextAlignment="Center"/>
-                        </StackLayout>
-                        <StackLayout Grid.Column="1">
-                            <Frame x:Name="Reward" HeightRequest="70" WidthRequest="70" BackgroundColor="#F0FFF0" CornerRadius="30">
-                                <Image Source="box.png" HeightRequest="50" WidthRequest="50" Aspect="AspectFill"/>
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding RewardCommand}"/>
-                                </Frame.GestureRecognizers>
-                            </Frame>
-                            <Label Text="Rewards" HorizontalTextAlignment="Center"/>
-                        </StackLayout>
-                        <StackLayout Grid.Column="2">
-                            <Frame x:Name="Offer" HeightRequest="70" WidthRequest="70" BackgroundColor="#F0FFF0" CornerRadius="30">
-                                <Image Source="discount.png" HeightRequest="50" WidthRequest="50" Aspect="AspectFill"/>
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding DiscountCommand}"/>
-                                </Frame.GestureRecognizers>
-                            </Frame>
-                            <Label Text="Offers" HorizontalTextAlignment="Center"/>
-                        </StackLayout>
-                        <StackLayout Grid.Column="3">
-                            <Frame x:Name="Help" HeightRequest="70" WidthRequest="70" BackgroundColor="#F0FFF0" CornerRadius="30">
-                                <Image Source="support.png" HeightRequest="50" WidthRequest="50" Aspect="AspectFill"/>
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding SupportCommand}"/>
-                                </Frame.GestureRecognizers>
-                            </Frame>
-                            <Label Text="24×7 Help" HorizontalTextAlignment="Center"/>
-                            <Label Text="&amp; Support" HorizontalTextAlignment="Center"/>
-                        </StackLayout>
-
-                    </HorizontalStackLayout>
-                </Grid>
-            </Frame>
-        </Grid>
-        <StackLayout VerticalOptions="EndAndExpand" Margin="10" Padding="10">
-            <ImageButton Source="qrcode.png" x:Name="Scan" BackgroundColor="#58D68D" Padding="5" CornerRadius="25" WidthRequest="120" Command="{Binding QRPayCommand}" />
-        </StackLayout>
+        <Frame Grid.Row="0" CornerRadius="15" Margin="20,10,20,0" BorderColor="LightGreen" BackgroundColor="White">
+            <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand">
+                <Label Text="Quick Access" HorizontalOptions="StartAndExpand" FontSize="Subtitle"/>
+                <StackLayout Orientation="Horizontal" Spacing="20" Margin="10">
+                <StackLayout>
+                    <Frame x:Name="Mobile" HeightRequest="70" WidthRequest="70" BorderColor="LightGreen" BackgroundColor="#F0FFF0" CornerRadius="30">
+                        <Image Source="contactbook.png" HeightRequest="50" WidthRequest="50" Aspect="AspectFill"/>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding AccountPageCommand}"/>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                    <Label Text="Account" HorizontalTextAlignment="Center"/>
+                </StackLayout>
+                <StackLayout>
+                    <Frame x:Name="History" HeightRequest="70" WidthRequest="70" BorderColor="LightGreen" BackgroundColor="#F0FFF0" CornerRadius="30">
+                        <Image Source="search.png" HeightRequest="50" WidthRequest="50" Aspect="AspectFill"/>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding HistoryPageCommand}"/>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                    <Label Text="History" HorizontalTextAlignment="Center"/>
+                </StackLayout>
+                <StackLayout>
+                    <Frame x:Name="Statement" HeightRequest="70" WidthRequest="70" BorderColor="LightGreen" BackgroundColor="#F0FFF0" CornerRadius="30">
+                        <Image Source="statement.png" HeightRequest="50" WidthRequest="50" Aspect="AspectFill"/>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding PDFDownloadCommand}"/>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                    <Label Text="Statement" HorizontalTextAlignment="Center"/>
+                </StackLayout>
+            </StackLayout>
+            </StackLayout>
+        </Frame>
+        <Frame BackgroundColor="Transparent" BorderColor="Transparent" HorizontalOptions="CenterAndExpand">
+            <StackLayout Orientation="Horizontal" Spacing="20" Margin="0,30,0,0">
+                <StackLayout>
+                    <Frame x:Name="Store" HeightRequest="90" WidthRequest="90" BorderColor="LightGreen" CornerRadius="15">
+                        <Image Source="store.png" Aspect="AspectFill"/>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding StoreCommand}"/>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                    <Label Text="Store Details" HorizontalTextAlignment="Center"/>
+                </StackLayout>
+                <StackLayout>
+                    <Frame x:Name="Refer" HeightRequest="90" WidthRequest="90" BorderColor="LightGreen" CornerRadius="15">
+                        <Image Source="box.png" Aspect="AspectFill"/>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding RewardCommand}"/>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                    <Label Text="Rewards" HorizontalTextAlignment="Center"/>
+                </StackLayout>
+            </StackLayout>
+        </Frame>
     </StackLayout>
 </ContentPage>

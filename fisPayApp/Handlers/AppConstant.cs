@@ -23,7 +23,7 @@ namespace fisPayApp.Handlers
             {
                 var flyoutItem = new FlyoutItem()
                 {
-                    Title = "Dashboard Page",
+                    //Title = "Dashboard Page",
                     Route = nameof(PersonDashBoardPage),
                     FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems,
                     Items =
@@ -60,7 +60,7 @@ namespace fisPayApp.Handlers
             {
                 var flyoutItem = new FlyoutItem()
                 {
-                    Title = "Dashboard Page",
+                    //Title = "Dashboard Page",
                     Route = nameof(VendorDashBoardPage),
                     FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems,
                     Items =
@@ -75,7 +75,7 @@ namespace fisPayApp.Handlers
                                 {
                                     Icon = Icons.Profile,
                                     Title = "Profile",
-                                    ContentTemplate = new DataTemplate(typeof(VendorProfile)),
+                                    ContentTemplate = new DataTemplate(typeof(PersonProfile)),
                                 },
                                  new ShellContent
                                 {

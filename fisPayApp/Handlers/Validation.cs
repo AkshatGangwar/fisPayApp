@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
 
 namespace fisPayApp.Handlers
 {
@@ -48,6 +45,17 @@ namespace fisPayApp.Handlers
         {
             var mainDisplayInfo = DeviceDisplay.MainDisplayInfo;
             return (mainDisplayInfo.Width / mainDisplayInfo.Density);
+        }
+        public static void toastmsg(string msg, string time, int size)
+        {
+            var duration = ToastDuration.Short;
+            if (time == "L")
+            {
+                duration = ToastDuration.Long;
+            }
+            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+            var toast = Toast.Make(msg, duration, size);
+            _ = toast.Show(cancellationTokenSource.Token);
         }
         public static string city()
         {

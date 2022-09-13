@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
+using fisPayApp.Handlers;
 using fisPayApp.Interfaces;
 using fisPayApp.Models;
 using Newtonsoft.Json;
@@ -47,6 +48,8 @@ namespace fisPayApp.Services
                                                  + Path.GetExtension(filename_initial);
                             }
                             File.WriteAllBytes(filename_current, bytearray);
+                            string sucessmsg = "File Downloaded At : " + filename_current;
+                            Validation.toastmsg(sucessmsg, "L", 18);
                             return "Success";    
                         }
                         else
@@ -61,9 +64,7 @@ namespace fisPayApp.Services
                 }
                 else
                 {
-                    CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-                    var toast = Toast.Make("No Connection", ToastDuration.Short, 18);
-                    _ = toast.Show(cancellationTokenSource.Token);
+                    Validation.toastmsg("No Connection", "S", 18);
                     return null;
                 }  
             }
@@ -107,9 +108,7 @@ namespace fisPayApp.Services
                 }
                 else
                 {
-                    CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-                    var toast = Toast.Make("No Connection", ToastDuration.Short, 18);
-                    _ = toast.Show(cancellationTokenSource.Token);
+                    Validation.toastmsg("No Connection", "S", 18);
                     return null;
                 }
             }

@@ -1,8 +1,4 @@
-﻿using CommunityToolkit.Maui.Alerts;
-using CommunityToolkit.Mvvm.Input;
-using fisPayApp.Interfaces;
-using fisPayApp.Models;
-using fisPayApp.Services;
+﻿using CommunityToolkit.Mvvm.Input;
 using fisPayApp.Views.Payments;
 using fisPayApp.Views.Person;
 using MauiApp1;

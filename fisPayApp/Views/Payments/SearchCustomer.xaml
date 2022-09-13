@@ -2,9 +2,37 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiApp1.SearchCustomer"
+             BackgroundColor="#F0FFF0"
              Title="">
-    <VerticalStackLayout VerticalOptions="CenterAndExpand">
-        <Image Source="empty.png" HeightRequest="70" WidthRequest="50"/>
-        <Label Text="Comming Soon!" TextColor="DarkGreen" FontSize="Subtitle" HorizontalTextAlignment="Center" />
-    </VerticalStackLayout>
+    <StackLayout Spacing="0" Orientation="Vertical" HorizontalOptions="CenterAndExpand" Margin="20,20,20,0" >
+        <Frame BackgroundColor="White" CornerRadius="30" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand" >
+            <StackLayout Orientation="Horizontal">
+                <Frame BackgroundColor="White" HeightRequest="40" BorderColor="LightGreen" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                    <Image Source="mobile.png" Aspect="AspectFill" Margin="5"/>
+                </Frame>
+                <Entry Text="{Binding MobileNum}" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="10,0,20,0" Placeholder="Mobile Number"/>
+                <Frame BackgroundColor="White" BorderColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                    <Image Source="magnify.png" Aspect="AspectFill" Margin="5"/>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GetUsrDeatilsCommand}"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+            </StackLayout>
+        </Frame>
+        <ActivityIndicator IsRunning="True" IsVisible="{Binding Indicator}" Color="#58D68D"/>
+        <Frame BackgroundColor="White" IsVisible="{Binding UserFrame}" BorderColor="LightGreen" Margin="10,50,10,0" Padding="0" HorizontalOptions="FillAndExpand" >
+            <StackLayout Orientation="Horizontal">
+                <Frame BackgroundColor="White" CornerRadius="30" BorderColor="Transparent" HeightRequest="50" WidthRequest="50" Padding="0" Margin="5">
+                    <Image Source="user.png" Aspect="AspectFill" Margin="5"/>
+                </Frame>
+                <Label Text="{Binding Name}" TextColor="Black" FontAttributes="Bold" FontSize="Medium" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                <Frame BackgroundColor="White" BorderColor="Transparent" HeightRequest="60" WidthRequest="60" CornerRadius="30" Padding="0" Margin="5">
+                    <Image Source="money.png" Aspect="AspectFill" Margin="5"/>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GetPaymentPageCommand}"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+            </StackLayout>
+        </Frame>
+    </StackLayout>
 </ContentPage>

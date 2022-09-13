@@ -1,7 +1,6 @@
-﻿using CommunityToolkit.Maui.Alerts;
-using CommunityToolkit.Maui.Core;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using fisPayApp.Handlers;
 using fisPayApp.Interfaces;
 using fisPayApp.Models;
 using fisPayApp.Services;
@@ -63,17 +62,13 @@ namespace fisPayApp.ViewModels
                         if (response.resultCode.statusCode == "200")
                         {
                             Indicator = "False";
-                            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-                            var toast = Toast.Make("Sucess!", ToastDuration.Short, 18);
-                            _ = toast.Show(cancellationTokenSource.Token);
+                            Validation.toastmsg("Sucess!", "S", 18);
                             await Shell.Current.GoToAsync($"{nameof(PaymentSucess)}?amount={Amount}&username={Name}");
                         }
                         else
                         {
                             Indicator = "False";
-                            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-                            var toast = Toast.Make("Error", ToastDuration.Short, 18);
-                            _ = toast.Show(cancellationTokenSource.Token);
+                            Validation.toastmsg("Error", "S", 18);
                         }
 
                     }
@@ -81,24 +76,18 @@ namespace fisPayApp.ViewModels
                     else
                     {
                         Indicator = "False";
-                        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-                        var toast = Toast.Make("Error", ToastDuration.Short, 18);
-                        _ = toast.Show(cancellationTokenSource.Token);
+                        Validation.toastmsg("Error", "S", 18);
                     }
                 }
                 else
                 {
-                    CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-                    var toast = Toast.Make("Please Enter Proper Amount...", ToastDuration.Short, 18);
-                    _ = toast.Show(cancellationTokenSource.Token);
+                    Validation.toastmsg("Please Enter Proper Amount...", "S", 18);
                 }
             }
             catch (Exception)
             {
                 Indicator = "False";
-                CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-                var toast = Toast.Make("Error", ToastDuration.Short, 18);
-                _ = toast.Show(cancellationTokenSource.Token);
+                Validation.toastmsg("Error", "S", 18);
             }
             finally
             {

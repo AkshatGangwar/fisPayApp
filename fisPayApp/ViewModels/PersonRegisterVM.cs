@@ -1,12 +1,9 @@
-﻿using CommunityToolkit.Maui.Alerts;
-using CommunityToolkit.Maui.Core;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using fisPayApp.Interfaces;
 using fisPayApp.Models;
 using fisPayApp.Services;
 using fisPayApp.Handlers;
-using fisPayApp.Views.Updates;
 
 namespace fisPayApp.ViewModels
 {
@@ -52,32 +49,24 @@ namespace fisPayApp.ViewModels
                     if (response.resultCode.statusCode == "200")
                     {
                         Indicator = "False";
-                        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-                        var toast = Toast.Make("Success!", ToastDuration.Short, 18);
-                        _ = toast.Show(cancellationTokenSource.Token);
+                        Validation.toastmsg("Success!", "S", 18);
                         await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
                     }
 
                     else
                     {
                         Indicator = "False";
-                        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-                        var toast = Toast.Make("Error!", ToastDuration.Short, 18);
-                        _ = toast.Show(cancellationTokenSource.Token);
+                        Validation.toastmsg("Error", "S", 18);
                     }
                 }
                 else
                 {
-                    CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-                    var toast = Toast.Make("Invalid Password!", ToastDuration.Short, 18);
-                    _ = toast.Show(cancellationTokenSource.Token);
+                    Validation.toastmsg("Invalid Password!", "S", 18);
                 }
             }
             else
             {
-                CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-                var toast = Toast.Make("Enter Name/Email/Password to Proceed...", ToastDuration.Short, 18);
-                _ = toast.Show(cancellationTokenSource.Token);
+                Validation.toastmsg("Enter Name/Email/Password to Proceed...", "S", 18);
             }
         }
         [RelayCommand]

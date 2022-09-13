@@ -31,6 +31,7 @@
                 </Frame.GestureRecognizers>
             </Frame>
         </StackLayout>
+        <ActivityIndicator IsRunning="True" IsVisible="{Binding Indicator}" Color="#58D68D"/>
         <ListView x:Name="xStoreList" SelectionMode="None" BackgroundColor="Transparent" ItemTapped="xStoreList_ItemTapped" ItemsSource="{Binding StoreLists}" RowHeight="150"  >
             <ListView.ItemTemplate>
                 <DataTemplate>

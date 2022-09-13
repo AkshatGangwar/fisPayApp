@@ -21,17 +21,17 @@ namespace fisPayApp.ViewModels
             if (!string.IsNullOrWhiteSpace(Mobile))
             {
                 Indicator = "True";
-                var response = await loginRepository.RegistrationOtp(Mobile);
-                //await Task.Delay(1500);
-                //var response = "1234";
+                //var response = await loginRepository.RegistrationOtp(Mobile);
+                await Task.Delay(1500);
+                var response = "1234";
                 if (response != null)
                 {
                     Indicator = "False";
-                    await Shell.Current.GoToAsync($"{nameof(RegistrationOTP)}?mobileNum={Mobile}&otp={response.dataObject.data.otp}");
+                    //await Shell.Current.GoToAsync($"{nameof(RegistrationOTP)}?mobileNum={Mobile}&otp={response.dataObject.data.otp}");
                     CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
                     var toast = Toast.Make("OTP Sent Successfully!", ToastDuration.Short, 18);
                     _ = toast.Show(cancellationTokenSource.Token);
-                    //await Shell.Current.GoToAsync($"{nameof(RegistrationOTP)}?mobileNum={Mobile}&otp={response}");
+                    await Shell.Current.GoToAsync($"{nameof(RegistrationOTP)}?mobileNum={Mobile}&otp={response}");
                 }
 
                 else

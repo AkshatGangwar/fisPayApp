@@ -1,7 +1,7 @@
 using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
 using fisPayApp.Interfaces;
-using fisPayApp.Models;
+using fisPayApp.Handlers;
 using fisPayApp.Services;
 
 namespace MauiApp1;
@@ -22,12 +22,16 @@ public partial class PdfReports : ContentPage
     }
     async void GetPdf(string from, string to)
     {
+        Indicator.IsVisible=true;
         var response = await pdfCreate.getPdf(from,to);
         if (response != null)
         {
-            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-            var toast = Toast.Make("File Downloaded Sucessfully", ToastDuration.Short, 18);
-            _ = toast.Show(cancellationTokenSource.Token);
+            Indicator.IsVisible = false;
+        }
+        else
+        {
+            Indicator.IsVisible = false;
+            Validation.toastmsg("Error", "S", 18);
         }
     }
 }

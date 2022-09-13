@@ -2,10 +2,9 @@
 using CommunityToolkit.Mvvm.Input;
 using fisPayApp.Interfaces;
 using fisPayApp.Services;
-using CommunityToolkit.Maui.Core;
-using CommunityToolkit.Maui.Alerts;
 using fisPayApp.Models;
 using System.Collections.ObjectModel;
+using fisPayApp.Handlers;
 
 namespace fisPayApp.ViewModels
 {
@@ -54,24 +53,18 @@ namespace fisPayApp.ViewModels
                     else
                     {
                         Indicator = "False";
-                        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-                        var toast = Toast.Make("Error", ToastDuration.Short, 18);
-                        _ = toast.Show(cancellationTokenSource.Token);
+                        Validation.toastmsg("Error", "S", 18);
                     }
                 }
                 else
                 {
                     Indicator = "False";
-                    CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-                    var toast = Toast.Make("Enter City to Search...", ToastDuration.Short, 18);
-                    _ = toast.Show(cancellationTokenSource.Token);
+                    Validation.toastmsg("Enter City to Search...", "S", 18);
                 }
             }
             catch (Exception)
             {
-                CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-                var toast = Toast.Make("Error", ToastDuration.Short, 18);
-                _ = toast.Show(cancellationTokenSource.Token);
+                Validation.toastmsg("Error", "S", 18);
             }
             finally
             {
@@ -98,28 +91,23 @@ namespace fisPayApp.ViewModels
                     Placemark placemark = placemarks?.FirstOrDefault();
                     if (placemark == null)
                     {
-                        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-                        var toast = Toast.Make("Error", ToastDuration.Short, 18);
-                        _ = toast.Show(cancellationTokenSource.Token);
+                        Validation.toastmsg("Error", "S", 18);
                     }
                     else
                     {
+                        IsBusy = false;
                         City = placemark.Locality;
                         GetStoreByCity();
                     }
                 }
                 catch (Exception)
                 {
-                    CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-                    var toast = Toast.Make("Error", ToastDuration.Short, 18);
-                    _ = toast.Show(cancellationTokenSource.Token);
+                    Validation.toastmsg("Error","S",18);
                 }
             }
             catch (Exception)
             {
-                CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-                var toast = Toast.Make("Error", ToastDuration.Short, 18);
-                _ = toast.Show(cancellationTokenSource.Token);
+                Validation.toastmsg("Error", "S", 18);
             }
             finally
             {

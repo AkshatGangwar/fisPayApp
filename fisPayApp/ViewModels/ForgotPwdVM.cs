@@ -1,13 +1,9 @@
-﻿using fisPayApp.Models;
-using fisPayApp.Services;
-using fisPayApp.Views;
-using fisPayApp.Views.Registration;
+﻿using fisPayApp.Services;
 using fisPayApp.Views.Updates;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using fisPayApp.Interfaces;
-using CommunityToolkit.Maui.Core;
-using CommunityToolkit.Maui.Alerts;
+using fisPayApp.Handlers;
 
 namespace fisPayApp.ViewModels
 {
@@ -39,25 +35,19 @@ namespace fisPayApp.ViewModels
                 if (response != null)
                 {
                     Indicator = "False";
-                    CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-                    var toast = Toast.Make("OTP Sent Successfully!", ToastDuration.Short, 18);
-                    _ = toast.Show(cancellationTokenSource.Token);
                     await Shell.Current.GoToAsync($"{nameof(UpdatePwdOTP)}?mobileNum={MobileNum}&otp={response.dataObject.data.otp}&userId={response.dataObject.data.userId}");
+                    Validation.toastmsg("OTP Sent Successfully!", "S", 18);
                 }
 
                 else
                 {
                     Indicator = "False";
-                    CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-                    var toast = Toast.Make("User Doesn't Exist with this Mobile Number!", ToastDuration.Short, 18);
-                    _ = toast.Show(cancellationTokenSource.Token);
+                    Validation.toastmsg("User Doesn't Exist with this Mobile Number!", "S", 18);
                 }
             }
             else
             {
-                CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-                var toast = Toast.Make("Enter Mobile Number to Proceed...", ToastDuration.Short, 18);
-                _ = toast.Show(cancellationTokenSource.Token);
+                Validation.toastmsg("Enter Mobile Number to Proceed...", "S", 18);
             }
         }
     }

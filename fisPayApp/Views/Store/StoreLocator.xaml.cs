@@ -26,31 +26,41 @@ public partial class StoreLocator : ContentPage
     {
         if (!string.IsNullOrWhiteSpace(xCity.Text))
         {
-            xFrame.IsVisible = true;
-            xList.ItemsSource = cityStr.Where(m => m.ToLower().Contains(xCity.Text.ToLower()));
+            var data= cityStr.Where(m => m.ToLower().Contains(xCity.Text.ToLower()));
+            if ((data.Any() == true) && (data.First().ToLower() != xCity.Text.ToLower()))
+            {
+                xFrame.IsVisible = true;
+                xList.ItemsSource = data;
+            }
+            else
+            {
+                ClrList();
+            }
         }
         else
         {
-            xFrame.IsVisible = false;
-            xList.ItemsSource = null;
+            ClrList();
         }
     }
 
     private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
         xCity.Text = xList.SelectedItem.ToString();
-        xFrame.IsVisible = false;
-        xList.ItemsSource = null;
+        ClrList();
     }
     private void ClearListView(object sender, EventArgs e)
     {
-        xFrame.IsVisible = false;
-        xList.ItemsSource = null;
+        ClrList();
     }
 
     private void xStoreList_ItemTapped(object sender, ItemTappedEventArgs e)
     {
         var popUpData = new StorePopup(e.Item as StoreList);
         this.ShowPopup(popUpData);
+    }
+    private void ClrList()
+    {
+        xFrame.IsVisible = false;
+        xList.ItemsSource = null;
     }
 }

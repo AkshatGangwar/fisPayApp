@@ -20,6 +20,7 @@
                 </StackLayout>
             </Frame>
         </StackLayout>
-        <Button Text="View PDF" BackgroundColor="#58D68D" TextColor="White" FontAttributes="Bold" CornerRadius="30" WidthRequest="150" Margin="0,25,0,0" Clicked="Button_Clicked"/>
+        <ActivityIndicator IsRunning="True" x:Name="Indicator" IsVisible="False" Color="#58D68D"/>
+        <Button Text="Download PDF" BackgroundColor="#58D68D" TextColor="White" FontAttributes="Bold" CornerRadius="30" WidthRequest="150" Margin="0,25,0,0" Clicked="Button_Clicked"/>
     </VerticalStackLayout>
 </ContentPage>

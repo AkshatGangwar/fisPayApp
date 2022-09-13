@@ -21,5 +21,6 @@ namespace fisPayApp.Interfaces
         Task<StoreResponse> GetStoreList(string City);
         Task<Response> Logoff(string UserID);
         Task<UserResponse> GetUserName(string ID);
+        Task<MobileSearchResponse> GetUserIdByMobile(string num);
     }
 }

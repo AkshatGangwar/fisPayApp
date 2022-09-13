@@ -4,8 +4,6 @@ using fisPayApp.Views.Registration;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Newtonsoft.Json;
-using CommunityToolkit.Maui.Alerts;
-using CommunityToolkit.Maui.Core;
 using fisPayApp.Interfaces;
 using fisPayApp.Views;
 using fisPayApp.Handlers;
@@ -67,36 +65,32 @@ namespace fisPayApp.ViewModels
                     else
                     {
                         Signing = "False";
-                        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-                        var toast = Toast.Make("Invalid Credentials!", ToastDuration.Short, 18);
-                        _ = toast.Show(cancellationTokenSource.Token);
+                        Validation.toastmsg("Invalid Credentials", "S", 18);
                     }
                 }
                 else
                 {
                     CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-                    var toast = Toast.Make("");
+                    string msg="";
                     if (string.IsNullOrWhiteSpace(UserMobile) && string.IsNullOrWhiteSpace(Password))
                     {
-                        toast = Toast.Make("Enter Mobile Number and Password to Signin", ToastDuration.Short, 18);
+                        msg = "Enter Mobile Number and Password to Signin";
                     }
                     else if (string.IsNullOrWhiteSpace(UserMobile))
                     {
-                        toast = Toast.Make("Enter Mobile Number to Signin", ToastDuration.Short, 18);
+                        msg = "Enter Mobile Number to Signin";
                     }
                     else
                     {
-                        toast = Toast.Make("Enter Password to Signin", ToastDuration.Short, 18);
+                        msg = "Enter Password to Signin";
                     }
 
-                    _ = toast.Show(cancellationTokenSource.Token);
+                    Validation.toastmsg(msg, "S", 18);
                 }
             }
             catch (Exception)
             {
-                CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-                var toast = Toast.Make("Error", ToastDuration.Short, 18);
-                _ = toast.Show(cancellationTokenSource.Token);
+                Validation.toastmsg("Error", "S", 18);
             }
             finally
             {
