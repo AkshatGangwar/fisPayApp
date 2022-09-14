@@ -19,6 +19,8 @@ namespace fisPayApp.ViewModels
         [ObservableProperty]
         private string comment;
         [ObservableProperty]
+        private string bal= App.UserDetails.walletBal;
+        [ObservableProperty]
         private string indicator = "False";
         readonly ILoginRepository loginRepository = new LoginService();
         [RelayCommand]
@@ -73,9 +75,11 @@ namespace fisPayApp.ViewModels
                         amount = Amount,
                         comment = Comment
                     });
-                    if (response.resultCode.statusCode == "200")
+                    if (response!= null)
                     {
                         Indicator = "False";
+                        Bal = response.dataObject.data.totalBalance;
+                        App.UserDetails.walletBal = Bal;
                         await AppConstant.AddFlyoutMenusDetails();
                         CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
                         var toast = Toast.Make("Ammount Added Succesfully!", ToastDuration.Short, 18);

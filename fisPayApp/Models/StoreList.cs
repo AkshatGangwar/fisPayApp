@@ -15,5 +15,20 @@
         public string zipcode { get; set; }
         public string latitude { get; set; }
         public string longitude { get; set; }
+        public double distan
+        {
+            get => dist();
+        }
+        public string distance
+        {
+            get => $"{dist()+"Km"}";
+        }
+        double dist()
+        {
+            Location boston = new Location(27.3637435, 79.6302954);
+            Location sanFrancisco = new Location(double.Parse(latitude), double.Parse(longitude));
+            return Math.Round(Location.CalculateDistance(boston, sanFrancisco, DistanceUnits.Kilometers), 2);
+        }
+        
     }
 }

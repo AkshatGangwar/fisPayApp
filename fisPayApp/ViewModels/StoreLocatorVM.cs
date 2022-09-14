@@ -46,7 +46,8 @@ namespace fisPayApp.ViewModels
                     var response = await loginRepository.GetStoreList(City);
                     if (response != null)
                     {
-                        StoreLists = new ObservableCollection<StoreList>(response.dataObject.data);
+                        List<StoreList> Lt= (response.dataObject.data).OrderBy(x => x.distan).ToList();
+                        StoreLists = new ObservableCollection<StoreList>(Lt);
                         Indicator = "False";
                     }
 
@@ -64,6 +65,7 @@ namespace fisPayApp.ViewModels
             }
             catch (Exception)
             {
+                Indicator = "False";
                 Validation.toastmsg("Error", "S", 18);
             }
             finally

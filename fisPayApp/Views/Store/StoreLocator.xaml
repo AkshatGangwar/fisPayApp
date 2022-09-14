@@ -47,14 +47,16 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <Frame Grid.RowSpan="4" BackgroundColor="#F0FFF0" CornerRadius="20" BorderColor="Transparent" HeightRequest="60" WidthRequest="60">
                                     <Image  Source="store.png" HeightRequest="40" WidthRequest="40" Aspect="AspectFill" />
                                 </Frame>
                                 <Label Grid.Row="0" Grid.Column="1"  TextColor="DarkGreen" Margin="10,0,0,0" Text="{Binding storeName}" FontAttributes="Bold" />
                                 <Label Grid.Row="1" Grid.Column="1" TextColor="Grey" Margin="10,5,0,0" Text="{Binding description}" FontAttributes="Italic" />
-                                <Label Grid.Row="2" Grid.Column="1" Margin="10,5,0,0" Text="{Binding address}" VerticalOptions="End" />
+                                <Label Grid.Row="2" Grid.Column="1" Margin="10,5,0,0" Text="{Binding address}" VerticalOptions="End" /> 
                                 <Label Grid.Row="3" Grid.Column="1" Margin="10,0,0,0" Text="{Binding landmark}" />
+                                <Label Grid.RowSpan="4" Grid.Column="2" VerticalTextAlignment="Center" Margin="10,0,0,0" Text="{Binding distance}" />
                             </Grid>
                         </Frame>
                     </ViewCell>

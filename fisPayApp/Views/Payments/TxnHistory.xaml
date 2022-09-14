@@ -6,7 +6,7 @@
              Title="Transactions History">
     <StackLayout Spacing="0" Orientation="Vertical" Margin="20,20,20,0" >
         <ActivityIndicator IsRunning="True" IsVisible="{Binding Indicator}" VerticalOptions="Center" Color="#58D68D"/>
-        <ListView ItemsSource="{Binding Transactions}" IsVisible="{Binding HeaderIndicator}" BackgroundColor="Transparent" SelectionMode="None" IsEnabled="False" Header="{Binding .}">
+        <ListView ItemsSource="{Binding Transactions}" IsVisible="{Binding HeaderIndicator}" BackgroundColor="Transparent" SelectionMode="None" Header="{Binding .}">
             <ListView.HeaderTemplate>
                 <DataTemplate>
                     <Frame BackgroundColor="#58D68D" Padding="5" CornerRadius="0">

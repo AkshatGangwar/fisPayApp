@@ -3,10 +3,42 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiApp1.AccountPage"
              Title="Account Details">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <StackLayout BackgroundColor="#F0FFF0" Padding="10">
+        <Frame CornerRadius="15" HorizontalOptions="CenterAndExpand" Margin="10,30,0,0" BorderColor="LightGreen" BackgroundColor="White">
+            <Grid ColumnSpacing="10" RowSpacing="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="40" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Frame Grid.Row="0" Grid.Column="1" HeightRequest="40" WidthRequest="40" HorizontalOptions="EndAndExpand" BackgroundColor="Transparent" VerticalOptions="Start" BorderColor="Transparent">
+                    <Image Source="edit.png" HeightRequest="30" WidthRequest="30" Aspect="AspectFill"/>
+                </Frame>
+                <StackLayout Grid.Row="0" Orientation="Vertical" Spacing="10" Margin="0,15,0,15">
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Account Number : " TextColor="#006400" FontAttributes="Bold" FontSize="Subtitle" />
+                        <Label Text="505202012345" FontSize="Subtitle" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Bank Name : " TextColor="#006400" FontAttributes="Bold" FontSize="Subtitle" />
+                        <Label Text="State Bank of India" FontSize="Subtitle" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="IFSC Code : " TextColor="#006400" FontAttributes="Bold" FontSize="Subtitle" />
+                        <Label Text="SBIN005623" FontSize="Subtitle" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Branch Name : " TextColor="#006400" FontAttributes="Bold" FontSize="Subtitle" />
+                        <Label Text="Mumbai" FontSize="Subtitle" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Account Type : " TextColor="#006400" FontAttributes="Bold" FontSize="Subtitle" />
+                        <Label Text="Savings" FontSize="Subtitle" />
+                    </StackLayout>
+                </StackLayout>
+            </Grid>
+        </Frame>
+    </StackLayout>
 </ContentPage>

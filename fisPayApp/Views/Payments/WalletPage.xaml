@@ -17,12 +17,18 @@
             <Button Text="Activate" BackgroundColor="#58D68D" TextColor="White" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0" Command="{Binding ActivateCommand}"/>
         </StackLayout>
         <StackLayout x:Name="WalletStack" Orientation="Vertical" Spacing="10">
+            <Frame HorizontalOptions="EndAndExpand" Margin="0,50,20,0" BorderColor="LightGreen" BackgroundColor="White" CornerRadius="30" >
+                <StackLayout Orientation="Horizontal" Margin="0">
+                    <Label Text="Available Balance : ₹" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" TextColor="Green" FontAttributes="Bold" FontSize="Subtitle"/>
+                    <Label Text="{Binding Bal}" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" FontAttributes="Bold" FontSize="Subtitle"/>
+                </StackLayout>
+            </Frame>
             <Grid HorizontalOptions="CenterAndExpand" Margin="0,30,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Frame Grid.Row="0" CornerRadius="15" Margin="10,10,5,10" WidthRequest="250" BackgroundColor="White">
+                <Frame Grid.Row="0" CornerRadius="15" BorderColor="LightGreen" Margin="10,10,5,10" WidthRequest="250" BackgroundColor="White">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>

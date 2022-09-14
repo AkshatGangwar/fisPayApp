@@ -1,6 +1,4 @@
-﻿
-
-namespace fisPayApp.Models
+﻿namespace fisPayApp.Models
 {
     public class WalletResponse
     {
@@ -14,5 +12,6 @@ namespace fisPayApp.Models
     {
         public string userId { get; set; }
         public string otp { get; set; }
+        public string totalBalance { get; set; }
     }
 }

@@ -17,5 +17,6 @@ namespace fisPayApp.Models
         public string userImg { get; set; }
         public bool isWalletActivate { get; set; }
         public bool isVendorAccount { get; set; }
+        public string walletBal { get;set; }
     }
 }

@@ -308,7 +308,7 @@ namespace fisPayApp.Services
                 return null;
             }
         }
-        public async Task<Response> AddWalletAmount(AddWalletRequest addWalletRequest)
+        public async Task<WalletResponse> AddWalletAmount(AddWalletRequest addWalletRequest)
         {
             try
             {
@@ -317,7 +317,7 @@ namespace fisPayApp.Services
                 var content = await ServiceRequest(url, walletRequestStr, "Post", null);
                 if (content != null)
                 {
-                    return JsonConvert.DeserializeObject<Response>(content.ToString());
+                    return JsonConvert.DeserializeObject<WalletResponse>(content.ToString());
                 }
                 else
                 {
